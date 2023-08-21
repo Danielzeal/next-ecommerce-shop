@@ -1,8 +1,8 @@
-export const Products: Products = [
+export const AllProducts: Products = [
   {
     id: "jsjjertecjhe47eu3",
     name: "Black Hoodie",
-    desc: "Introducing our sleek and versatile Black Hoodie – a timeless addition to your wardrobe. Crafted with comfort and style in mind, this hoodie is the epitome of understated cool. The rich black hue complements any outfit, making it the perfect choice for both casual outings and laid-back evenings. Its premium cotton blend ensures a soft touch against your skin, while the adjustable hood adds an extra layer of coziness. Whether you're heading out for a brisk walk or simply relaxing at home, our Black Hoodie is the ultimate go-to piece. Elevate your fashion game with this essential staple today.",
+    desc: " a timeless addition to your wardrobe. Crafted with comfort and style in mind, this hoodie is the epitome of understated cool. The rich black hue complements any outfit, making it the perfect choice for both casual outings and laid-back evenings. Its premium cotton blend ensures a soft touch against your skin, while the adjustable hood adds an extra layer of coziness. Whether you're heading out for a brisk walk or simply relaxing at home, our Black Hoodie is the ultimate go-to piece. Elevate your fashion game with this essential staple today.",
     img: "/img/black-hoodie.jpg",
     price: 64.9,
     sizes: ["s", "m", "l", "xl"],
@@ -13,11 +13,13 @@ export const Products: Products = [
   {
     id: "jhjkrsjioeiriogjejrie",
     name: "White Face-Cap",
-    desc: "Introducing our classic White Face Cap – a must-have accessory that effortlessly combines style and sun protection. Designed with a clean and timeless aesthetic, this cap adds a touch of sophistication to any outfit. The crisp white color pairs seamlessly with various looks, making it a versatile choice for both urban adventures and outdoor escapades. Crafted with high-quality materials, the cap offers a comfortable fit and features an adjustable strap for a personalized feel. Whether you're strolling through the city streets or enjoying a sunny day at the park, our White Face Cap is your go-to accessory for staying cool and looking sharp. Embrace the elegance of simplicity – get your White Face Cap today.",
+    desc: "a must-have accessory that effortlessly combines style and sun protection. Designed with a clean and timeless aesthetic, this cap adds a touch of sophistication to any outfit. The crisp white color pairs seamlessly with various looks, making it a versatile choice for both urban adventures and outdoor escapades. Crafted with high-quality materials, the cap offers a comfortable fit and features an adjustable strap for a personalized feel. Whether you're strolling through the city streets or enjoying a sunny day at the park, our White Face Cap is your go-to accessory for staying cool and looking sharp. Embrace the elegance of simplicity – get your White Face Cap today.",
     img: "/img/cap.jpg",
     price: 29.9,
     sizes: ["s", "m", "l", "xl"],
     category: "cap",
+    numReviews: 1,
+    rating: 3,
   },
   {
     id: "jhsazjdfjkjskjfjweoiw",
@@ -27,6 +29,8 @@ export const Products: Products = [
     price: 24.9,
     sizes: ["s", "m", "l", "xl"],
     category: "hat",
+    numReviews: 0,
+    rating: 4.8,
   },
   {
     id: "jhrjerekrjgioejo",
@@ -36,6 +40,8 @@ export const Products: Products = [
     price: 26.9,
     sizes: ["s", "m", "l", "xl"],
     category: "demin",
+    numReviews: 7,
+    rating: 2.3,
   },
   {
     id: "hsehfiwigejoiowajiej",
@@ -45,6 +51,8 @@ export const Products: Products = [
     price: 29.9,
     sizes: ["s", "m", "l", "xl"],
     category: "shirt",
+    numReviews: 3,
+    rating: 4,
   },
   {
     id: "uejhrjhfejrfwjiajefiwjeoijfwidjve",
@@ -54,6 +62,8 @@ export const Products: Products = [
     price: 24.9,
     sizes: ["s", "m", "l", "xl"],
     category: "hoodie",
+    numReviews: 12,
+    rating: 2,
   },
   {
     id: "hjrsjhfjwfewuijiukwjoiaes",
@@ -63,5 +73,7 @@ export const Products: Products = [
     price: 28.9,
     sizes: ["s", "m", "l", "xl"],
     category: "cap",
+    numReviews: 1,
+    rating: 4.1,
   },
 ];

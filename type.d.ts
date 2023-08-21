@@ -6,7 +6,7 @@ type Product = {
   price: number;
   sizes?: string[];
   numReviews?: number;
-  rating?: number;
+  rating: number;
   category?: string;
 };
 
