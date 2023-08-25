@@ -18,11 +18,11 @@ const Rating = ({ value }: Props) => {
       {stars.map((star) => (
         <span key={star.wholeNum}>
           {value >= star.wholeNum ? (
-            <FaStar />
+            <FaStar size={24} />
           ) : value >= star.decimalNum ? (
-            <FaStarHalfAlt />
+            <FaStarHalfAlt size={24} />
           ) : (
-            <FaRegStar />
+            <FaRegStar size={24} />
           )}
         </span>
       ))}

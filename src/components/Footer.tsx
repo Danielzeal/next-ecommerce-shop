@@ -1,7 +1,9 @@
+import Container from "./Container";
+
 const Footer = () => {
   return (
-    <footer className='bg-slate-400 h-20 flex items-center justify-between'>
-      footer
+    <footer className='bg-black text-white h-20 flex items-center justify-between'>
+      <Container>footer</Container>
     </footer>
   );
 };

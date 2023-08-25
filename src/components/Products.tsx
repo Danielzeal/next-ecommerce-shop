@@ -12,21 +12,22 @@ const Products = () => {
           key={product.id}
           className='bg-slate-200 p-3'
         >
-          <Image
-            src={product.img}
-            alt={product.name}
-            width={300}
-            height={300}
-            className='object-contain w-full'
-          />
+          <div className='relative h-[300px] w-full'>
+            <Image
+              src={product.img}
+              alt={product.name}
+              fill
+              className='object-cover'
+            />
+          </div>
           <h2 className='text-black text-center font-semibold text-2xl py-4'>
             {product.name}
           </h2>
-          <div className='flex justify-between'>
-            <p>
+          <div className='flex justify-between items-center'>
+            <div className='flex items-center justify-center gap-2'>
               <Rating value={product.rating} />{" "}
-              <span>({product.numReviews})Reviews</span>
-            </p>
+              <span>({product.numReviews})</span>
+            </div>
             <h3 className='text-green-700'>${product.price}</h3>
           </div>
         </Link>
