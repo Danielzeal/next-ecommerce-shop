@@ -5,9 +5,13 @@ import { useEffect, useState } from "react";
 import Container from "@/components/Container";
 import Image from "next/image";
 import { FaTrash } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import Button from "@/components/Button";
 
 const CartPage = () => {
   const [total, setTotal] = useState(0);
+  const router = useRouter();
 
   const { products, incQtyInCart, decQtyInCart, removeFromCart, clearCart } =
     useCartStore();
@@ -19,23 +23,21 @@ const CartPage = () => {
   useEffect(() => {
     const getTotal = () => {
       if (products) {
-        const { total } = products.reduce(
-          (acc, curr) => {
-            const item = curr.quantity * curr.price;
-            acc.total += item;
-
-            return acc;
-          },
-          {
-            total: 0,
-          }
-        );
+        const total = products.reduce((acc, curr) => {
+          const item = curr.quantity * curr.price;
+          acc += item;
+          return acc;
+        }, 0);
         setTotal(total);
       }
     };
 
     getTotal();
   }, [products]);
+
+  const handleCheckOut = () => {
+    router.push("/checkout");
+  };
 
   return (
     <Container>
@@ -60,17 +62,22 @@ const CartPage = () => {
                     key={product.id}
                     className='border-t-2 border-gray-300 text-center'
                   >
-                    <td className='flex items-center gap-3 text-start'>
-                      <div className='w-24 h-24 relative'>
-                        <Image
-                          src={product.img}
-                          alt={"testing"}
-                          fill
-                          sizes='100%'
-                          className='object-contain'
-                        />
-                      </div>
-                      <p className='font-semibold text-lg'>{product.name}</p>
+                    <td>
+                      <Link
+                        href={`/product/${product.productId}`}
+                        className='flex items-center gap-3 text-start cursor-pointer'
+                      >
+                        <div className='w-24 h-24 relative'>
+                          <Image
+                            src={product.img}
+                            alt={"testing"}
+                            fill
+                            sizes='100%'
+                            className='object-contain'
+                          />
+                        </div>
+                        <p className='font-semibold text-lg'>{product.name}</p>
+                      </Link>
                     </td>
                     <td className='uppercase font-semibold text-lg'>
                       {product.size}
@@ -93,7 +100,7 @@ const CartPage = () => {
                         </button>
                       </div>
                     </td>
-                    <td>${product.quantity * product.price}</td>
+                    <td>$ {(product.quantity * product.price).toFixed(2)}</td>
                     <td>
                       <button onClick={() => removeFromCart({ ...product })}>
                         <FaTrash className='text-red-500' />
@@ -104,7 +111,7 @@ const CartPage = () => {
               </tbody>
             </table>
             <button
-              className='bg-red-500 text-white py-2 px-6 rounded-md my-8'
+              className='bg-red-500 text-white py-2 px-6 rounded-md my-8 hover:bg-red-300 hover:text-gray-200 transition-colors ease-in duration-200'
               onClick={() => clearCart()}
             >
               Clear
@@ -112,11 +119,9 @@ const CartPage = () => {
             <div className='flex w-[200px] flex-col py-2 border-t-2 border-gray-200 gap-3'>
               <div className='flex justify-between items-center font-bold'>
                 <p>Total</p>
-                <p>{total}</p>
+                <p>$ {total.toFixed(2)}</p>
               </div>
-              <button className='w-full bg-black text-white py-2 rounded-md'>
-                Pay
-              </button>
+              <Button onClick={handleCheckOut} text='pay' className='w-full' />
             </div>
           </>
         ) : (

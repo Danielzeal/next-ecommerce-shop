@@ -1,13 +1,16 @@
 type Product = {
   id: string;
-  name: string;
-  desc: string;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+  description: string;
   img: string;
   price: number;
   sizes: string[];
-  numReviews: number;
+  catName: string;
+  userEmail: string;
   rating: number;
-  category: string;
+  numReview: number;
 };
 
 type Products = Product[];
@@ -19,9 +22,61 @@ type CartItem = {
   quantity: number;
   price: number;
   name: string;
+  productId: string;
 };
 
-// type Category = {
-//   id: string;
-//   slug: string;
-// }[];
+type Orders = {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  amount: number;
+  currency: string;
+  paymentIntentId: string;
+  products: CartItem[];
+  status: string;
+  deliveryStatus: string;
+  userEmail: string;
+  address: null | object;
+};
+
+type Sizes = {
+  name: string;
+  val: string;
+  id: string;
+}[];
+
+type Review = {
+  id: string;
+  createdAt: string;
+  rating: number;
+  userEmail: string;
+  comment: string;
+  title: string;
+  user: User;
+};
+
+type User = {
+  id: string;
+  name: string;
+  email: string;
+  emailVerified: null | boolean;
+  image: string;
+  isAdmin: boolean;
+};
+
+type EditProductDataType = {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  imgFile: string;
+  cat: string;
+  selectedSizes: string[];
+};
+
+type AddProductDataType = Omit<EditProductDataType, "id">;
+
+type CategoryType = {
+  name: string;
+  id: string;
+};

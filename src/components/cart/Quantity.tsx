@@ -9,7 +9,7 @@ type Props = {
 
 const Quantity = ({ count, setCount }: Props) => {
   const handleQtyInc = () => {
-    if (count >= 9) return;
+    if (count >= 15) return;
     setCount((prev: number) => prev + 1);
   };
 
@@ -19,21 +19,21 @@ const Quantity = ({ count, setCount }: Props) => {
   };
 
   return (
-    <div className='flex justify-between text-2xl'>
-      <h3 className='italic'>Quantity:</h3>
+    <div className='flex justify-between text-xl'>
+      <h3 className=''>Quantity</h3>
       <div className='flex gap-4 items-center justify-center'>
         <button
           onClick={handleQtyDec}
-          className='cursor-pointer py-1 px-3 border border-red-200 hover:bg-red-200 transition hover:border-0 hover:text-white'
+          className='cursor-pointer w-8 h-8 rounded-md  bg-red-300 hover:bg-red-400 text-white transition-colors duration-200 ease-in-out'
         >
-          {"<"}
+          {"-"}
         </button>
         <span>{count}</span>
         <button
           onClick={handleQtyInc}
-          className='cursor-pointer py-1 px-3 border border-green-200 hover:border-0 hover:bg-green-200 hover:text-white'
+          className='cursor-pointer w-8 h-8 rounded-md border bg-green-300 hover:bg-green-400 text-white transition-colors duration-200 ease-in-out'
         >
-          {">"}
+          {"+"}
         </button>
       </div>
     </div>

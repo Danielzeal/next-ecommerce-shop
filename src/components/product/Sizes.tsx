@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Rating from "./Rating";
-import Horizontal from "./Horizontal";
-import Quantity from "./Quantity";
+import Rating from "../Rating";
+import Horizontal from "../Horizontal";
+import Quantity from "../cart/Quantity";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/store/store";
+import Button from "../Button";
 
 type Props = {
   product: Product;
@@ -34,7 +35,8 @@ const Sizes = ({ product }: Props) => {
       img: product.img,
       quantity: count,
       price: product.price,
-      name: product.name,
+      name: product.title,
+      productId: product.id,
     });
     router.push("/cart");
   };
@@ -42,18 +44,16 @@ const Sizes = ({ product }: Props) => {
   return (
     <>
       <div className='flex flex-col gap-3'>
-        <h3 className='text-2xl italic'>
-          Price:{" "}
-          <span className='text-xl text-green-400'>${product.price}</span>
-        </h3>
-        <div>
-          <div className='flex gap-3 items-center'>
-            <h3 className='text-2xl italic'>Size:</h3>
+        <h3 className='text-2xl text-green-400'>${product.price}</h3>
+        <div className='flex flex-col gap-4'>
+          <div className='flex gap-3 items-center text-xl'>
             {product.sizes?.map((size, index) => (
               <button
                 key={size}
-                className={`bg-white rounded-full h-8 w-8 gap-2 text-lg uppercase font-semibold ${
-                  selected === index ? "border border-red-300 text-red-200" : ""
+                className={`bg-white rounded-md h-8 w-8 text-base uppercase font-semibold transition-all duration-200 ease-in-out ${
+                  selected === index
+                    ? "border border-green-400 text-green-300"
+                    : "text-red-400"
                 }`}
                 onClick={() => handleChange(index)}
               >
@@ -61,23 +61,22 @@ const Sizes = ({ product }: Props) => {
               </button>
             ))}
           </div>
-          <h3 className='text-2xl italic'>Category: {product.category}</h3>
-          <div className='flex items-center gap-2'>
-            <h3 className='text-2xl italic'>Rating:</h3>
+          <h3 className='text-xl capitalize'>{product.catName}</h3>
+          <div className='flex flex-col gap-2'>
             <Rating value={product.rating} />{" "}
-            <span className='text-lg'>({product.numReviews}) Reviews</span>
+            {product.numReview >= 1 && (
+              <p>
+                {product.numReview}{" "}
+                {product.numReview > 1 ? "Reviews" : "Review"}
+              </p>
+            )}
           </div>
         </div>
       </div>
       <Horizontal />
       <div className='flex flex-col gap-3'>
         <Quantity count={count} setCount={setCount} />
-        <button
-          className='uppercase font-semibold bg-black text-white py-4 rounded-lg w-full'
-          onClick={handleSubmit}
-        >
-          add to cart
-        </button>
+        <Button onClick={handleSubmit} text='add to cart' className='w-full' />
       </div>
       <Horizontal />
     </>

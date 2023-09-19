@@ -40,12 +40,15 @@ model Session {
 model User {
   id            String    @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String    @unique
   emailVerified DateTime?
   image         String?
   isAdmin       Boolean   @default(false)
+  order         Order[]
   accounts      Account[]
   sessions      Session[]
+  review        Review[]
+  product       Product[]
 }
 
 model VerificationToken {
@@ -54,4 +57,56 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Order {
+  id              String   @id @default(cuid())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  amount          Float
+  currency        String
+  paymentIntentId String   @unique
+  products        Json[]
+  status          String?  @default("pending")
+  deliveryStatus  String?  @default("pending")
+  user            User     @relation(fields: [userEmail], references: [email])
+  userEmail       String
+  address         Json?
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  title       String   @unique
+  description String
+  img         String?
+  price       Float
+  rating      Float    @default(0)
+  numReview   Int      @default(0)
+  sizes       String[]
+  reviews     Review[]
+  category    Category @relation(fields: [catName], references: [name], onDelete: Cascade)
+  catName     String
+  user        User     @relation(fields: [userEmail], references: [email], onDelete: Cascade)
+  userEmail   String
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  rating    Float    @default(0)
+  user      User     @relation(fields: [userEmail], references: [email], onDelete: Cascade)
+  userEmail String
+  comment   String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  name      String    @unique
+  products  Product[]
 }
