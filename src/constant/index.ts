@@ -5,4 +5,4 @@ export const sizes: Sizes = [
   { name: "Extra Large", val: "xl", id: "xlarge" },
 ];
 
-export const BASEURL = process.env.API_URL as string;
+export const BASEURL = process.env.NEXT_PUBLIC_API_URL as string;

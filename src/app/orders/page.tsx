@@ -1,8 +1,9 @@
 import { headers } from "next/headers";
 import Container from "@/components/Container";
+import { BASEURL } from "@/constant";
 
 const getOrders = async () => {
-  const res = await fetch("http://localhost:3000/api/orders", {
+  const res = await fetch(`${BASEURL}/orders`, {
     method: "GET",
     cache: "no-store",
     headers: headers(),

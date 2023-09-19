@@ -3,7 +3,7 @@ import { BASEURL } from "@/constant";
 // fetch all categories
 export const getCategories = async () => {
   try {
-    const res = await fetch(`${BASEURL}/products/category`);
+    const res = await fetch(`${BASEURL}/api/products/category`);
 
     if (!res.ok) {
       throw new Error("Something went wrong!");
@@ -18,7 +18,7 @@ export const getCategories = async () => {
 // fetch all productd
 export const getProducts = async (pageNumber: number, category: string) => {
   const res = await fetch(
-    `${BASEURL}/products?page=${pageNumber}&category=${category || ""}`,
+    `${BASEURL}/api/products?page=${pageNumber}&category=${category || ""}`,
     {
       cache: "no-store",
     }
@@ -33,7 +33,7 @@ export const getProducts = async (pageNumber: number, category: string) => {
 
 export const getProduct = async (id: string) => {
   try {
-    const res = await fetch(`${BASEURL}/products/${id}`, {
+    const res = await fetch(`${BASEURL}/api/products/${id}`, {
       cache: "no-store",
     });
 
@@ -49,7 +49,7 @@ export const getProduct = async (id: string) => {
 
 export const getSliderProducts = async () => {
   try {
-    const res = await fetch(`${BASEURL}/products/slide`, {
+    const res = await fetch(`${BASEURL}/api/products/slide`, {
       cache: "no-store",
     });
 
