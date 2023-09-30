@@ -31,7 +31,7 @@ const Products = ({ searchParams }: Props) => {
   useEffect(() => {}, [pageNumber]);
 
   const { isLoading, data } = useQuery({
-    queryKey: ["products"],
+    queryKey: ["products", pageNumber],
     queryFn: async () => {
       const res = await fetch(
         `/api/products/?page=${pageNumber}&category=${undefined}`

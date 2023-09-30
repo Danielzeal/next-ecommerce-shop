@@ -30,6 +30,10 @@ const CheckoutClient = () => {
   }, []);
 
   useEffect(() => {
+    if (clientSecret) return;
+  }, [clientSecret]);
+
+  useEffect(() => {
     const getPaymentIntent = async () => {
       if (products) {
         setError(false);
