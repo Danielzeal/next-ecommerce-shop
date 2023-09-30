@@ -34,7 +34,6 @@ export const POST = async (req: NextRequest) => {
         products: items,
         user: { connect: { email: session.user.email! } },
       };
-      console.log(orderData);
 
       // create new order
       if (payment_intent_id) {
@@ -89,8 +88,7 @@ export const POST = async (req: NextRequest) => {
         if (paymentIntent) {
           orderData.paymentIntentId = paymentIntent.id;
         }
-        console.log(orderData);
-
+        console.log(paymentIntent);
         // create new order
         await prisma.order.create({
           data: orderData,
