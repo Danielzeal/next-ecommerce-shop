@@ -7,14 +7,21 @@ import {
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
-import { FormEvent, useEffect, useState } from "react";
+import {
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 
 type Props = {
   client: string;
   handleSuccess: (value: boolean) => void;
+  setClient: Dispatch<SetStateAction<string>>;
 };
 
-const CheckoutForm = ({ client, handleSuccess }: Props) => {
+const CheckoutForm = ({ client, handleSuccess, setClient }: Props) => {
   const { clearCart, handleIntent } = useCartStore();
   const stripe = useStripe();
   const elements = useElements();
@@ -36,7 +43,7 @@ const CheckoutForm = ({ client, handleSuccess }: Props) => {
     handleSuccess(false);
   }, [stripe, client, handleSuccess]);
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!stripe || !elements) {
@@ -53,6 +60,8 @@ const CheckoutForm = ({ client, handleSuccess }: Props) => {
       if (!error) {
         clearCart();
         handleIntent(null);
+        setClient("");
+        handleSuccess(true);
       }
 
       setLoading(false);

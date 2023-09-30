@@ -76,7 +76,11 @@ const CheckoutClient = () => {
     <div className='w-full h-full'>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm client={clientSecret} handleSuccess={handleSuccess} />
+          <CheckoutForm
+            client={clientSecret}
+            handleSuccess={handleSuccess}
+            setClient={setClientSecret}
+          />
         </Elements>
       )}
       {loading && <div className='text-center text-lg'>Loading...</div>}
