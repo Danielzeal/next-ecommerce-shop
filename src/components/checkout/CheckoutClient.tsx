@@ -29,7 +29,6 @@ const CheckoutClient = () => {
   useEffect(() => {
     const getPaymentIntent = async () => {
       if (products) {
-        setError(false);
         setLoading(true);
         try {
           const res = await fetch("/api/create-payment-intent", {
@@ -50,7 +49,6 @@ const CheckoutClient = () => {
           }
         } catch (error) {
           console.log(error);
-          setError(true);
         }
       }
     };
@@ -85,9 +83,9 @@ const CheckoutClient = () => {
           </Elements>
         )
       )}
-      {error && (
+      {/* {error && (
         <div className='text-center text-red-500'>Error occured! Try agian</div>
-      )}
+      )} */}
       {paySuccess && (
         <div className='text-center text-teal-500 flex flex-col items-center justify-center'>
           <h3>Payment Success</h3>

@@ -24,6 +24,7 @@ export const POST = async (req: NextRequest) => {
     try {
       const body = await req.json();
       const { items, payment_intent_id } = body;
+      console.log(body);
 
       const total = calculateOrderAmount(items) * 100;
 
@@ -34,6 +35,7 @@ export const POST = async (req: NextRequest) => {
         products: items,
         user: { connect: { email: session?.user.email! } },
       };
+      console.log(orderData);
 
       // create new order
       if (payment_intent_id) {
