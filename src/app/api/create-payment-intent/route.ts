@@ -91,11 +91,11 @@ export const POST = async (req: NextRequest) => {
       }
     } catch (error) {
       return NextResponse.json(
-        { message: "Something went wrong" },
+        { error: "Something went wrong" },
         { status: 500 }
       );
     }
   } else {
-    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 };
