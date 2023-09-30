@@ -61,7 +61,6 @@ const CheckoutForm = ({ client, handleSuccess, setClient }: Props) => {
         clearCart();
         handleIntent(null);
         setClient("");
-        handleSuccess(true);
       }
 
       setLoading(false);

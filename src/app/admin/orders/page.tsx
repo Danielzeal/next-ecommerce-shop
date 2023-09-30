@@ -64,7 +64,7 @@ const AllOrders = () => {
 
   return (
     <Container>
-      <div className=' bg-white my-6 p-8 rounded-md shadow-md overflow-hidden'>
+      <div className=' bg-white my-6 p-8 rounded-md shadow-md overflow-x-auto no-scrollbar'>
         <h1 className='text-center md:text-2xl text-lg font-lora font-bold mb-6'>
           Orders
         </h1>

@@ -7,6 +7,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { StripeElementsOptions, loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import Button from "../Button";
+import Loading from "../Loading";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
@@ -39,26 +40,23 @@ const CheckoutClient = () => {
               payment_intent_id: paymentIntent,
             }),
           });
-
+          setLoading(false);
           if (res.status === 401) {
-            setLoading(false);
             router.push("/login");
-            setError(true);
           } else {
-            setLoading(false);
             const data = await res.json();
             setClientSecret(data.paymentIntent.client_secret);
             handleIntent(data.paymentIntent.id);
           }
         } catch (error) {
           console.log(error);
+          setError(true);
         }
       }
     };
 
     getPaymentIntent();
   }, [products, paymentIntent, router, handleIntent]);
-  console.log(paymentIntent);
 
   const options: StripeElementsOptions = {
     clientSecret,
@@ -74,16 +72,19 @@ const CheckoutClient = () => {
 
   return (
     <div className='w-full h-full'>
-      {clientSecret && (
-        <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm
-            client={clientSecret}
-            handleSuccess={handleSuccess}
-            setClient={setClientSecret}
-          />
-        </Elements>
+      {loading ? (
+        <Loading />
+      ) : (
+        clientSecret && (
+          <Elements options={options} stripe={stripePromise}>
+            <CheckoutForm
+              client={clientSecret}
+              handleSuccess={handleSuccess}
+              setClient={setClientSecret}
+            />
+          </Elements>
+        )
       )}
-      {loading && <div className='text-center text-lg'>Loading...</div>}
       {error && (
         <div className='text-center text-red-500'>Error occured! Try agian</div>
       )}
