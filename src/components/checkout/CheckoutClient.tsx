@@ -29,6 +29,7 @@ const CheckoutClient = () => {
   useEffect(() => {
     const getPaymentIntent = async () => {
       if (products) {
+        setError(false);
         setLoading(true);
         try {
           const res = await fetch("/api/create-payment-intent", {
@@ -42,13 +43,13 @@ const CheckoutClient = () => {
           setLoading(false);
           if (res.status === 401) {
             router.push("/login");
-          } else {
-            const data = await res.json();
-            setClientSecret(data.paymentIntent.client_secret);
-            handleIntent(data.paymentIntent.id);
           }
+          const data = await res.json();
+          setClientSecret(data.paymentIntent.client_secret);
+          handleIntent(data.paymentIntent.id);
         } catch (error) {
           console.log(error);
+          setError(true);
         }
       }
     };
@@ -70,22 +71,19 @@ const CheckoutClient = () => {
 
   return (
     <div className='w-full h-full'>
-      {loading ? (
-        <Loading />
-      ) : (
-        clientSecret && (
-          <Elements options={options} stripe={stripePromise}>
-            <CheckoutForm
-              client={clientSecret}
-              handleSuccess={handleSuccess}
-              setClient={setClientSecret}
-            />
-          </Elements>
-        )
+      {loading && <div className='text-center font-bold'>Loading...</div>}
+      {clientSecret && (
+        <Elements options={options} stripe={stripePromise}>
+          <CheckoutForm
+            client={clientSecret}
+            handleSuccess={handleSuccess}
+            setClient={setClientSecret}
+          />
+        </Elements>
       )}
-      {/* {error && (
+      {error && (
         <div className='text-center text-red-500'>Error occured! Try agian</div>
-      )} */}
+      )}
       {paySuccess && (
         <div className='text-center text-teal-500 flex flex-col items-center justify-center'>
           <h3>Payment Success</h3>
