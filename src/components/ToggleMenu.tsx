@@ -63,16 +63,16 @@ const ToggleMenu = () => {
         <nav className='absolute z-40 w-[200px] p-2 bg-white top-[100px] right-4 shadow-2xl text-black flex flex-col rounded-md'>
           {status === "authenticated" ? (
             <>
-              <Links href='/orders' onClick={handleMenu}>
-                My Order
-              </Links>
-              {data?.user?.isAdmin && (
+              {data?.user?.isAdmin ? (
                 <Links href='/admin' onClick={handleMenu}>
                   Admin
                 </Links>
+              ) : (
+                <Links href='/orders' onClick={handleMenu}>
+                  My Order
+                </Links>
               )}
               <hr />
-
               <Links href='/' onClick={handleLogout}>
                 Logout
               </Links>

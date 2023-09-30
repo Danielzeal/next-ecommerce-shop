@@ -38,9 +38,9 @@ const Products = async ({
         </>
       ) : (
         <div className='w-full bg-white md:p-8 p-4 rounded-md mt-[120px] shadow-md'>
-          <h1 className='text-center text-3xl font-semibold'>
+          <p className='text-center font-semibold'>
             You have no record of product on your database!
-          </h1>
+          </p>
         </div>
       )}
     </>

@@ -13,6 +13,7 @@ export const useIntentStore = create(
     (set, get) => ({
       paymentIntent,
       handleIntent: (val) => {
+        if (val) return;
         set(() => ({
           paymentIntent: val,
         }));

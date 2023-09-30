@@ -4,12 +4,15 @@ import Image from "next/image";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Link from "next/link";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import Pagination from "../home/Pagination";
 
 type Props = {
   products: Products;
+  count: number;
+  pageNumber: number;
 };
 
-const AdminProducts = ({ products }: Props) => {
+const AdminProducts = ({ products, count, pageNumber }: Props) => {
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
@@ -87,6 +90,7 @@ const AdminProducts = ({ products }: Props) => {
           ))}
         </tbody>
       </table>
+      <Pagination page={pageNumber} pageCount={count} />
     </>
   ) : (
     <h2 className='font-bold text-center text-xl w-full'>

@@ -20,7 +20,7 @@ const Quantity = ({ count, setCount }: Props) => {
 
   return (
     <div className='flex justify-between text-xl'>
-      <h3 className=''>Quantity</h3>
+      <h3 className='font-lora font-semibold'>Quantity</h3>
       <div className='flex gap-4 items-center justify-center'>
         <button
           onClick={handleQtyDec}

@@ -1,16 +1,9 @@
 import Container from "@/components/Container";
 import Sizes from "@/components/product/Sizes";
 import Image from "next/image";
-import { Lora } from "next/font/google";
 import Horizontal from "@/components/Horizontal";
 import Review from "@/components/product/Review";
 import { getProduct } from "@/services";
-
-const lora = Lora({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  style: ["italic", "normal"],
-});
 
 const SingleProduct = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
@@ -36,7 +29,7 @@ const SingleProduct = async ({ params }: { params: { id: string } }) => {
               <div className='flex lg:gap-12 gap-6 flex-col lg:flex-row'>
                 <div className='lg:w-1/2'>
                   <h1
-                    className={`${lora.className} font-semibold md:text-4xl text-3xl uppercase`}
+                    className={`font-semibold md:text-4xl text-3xl uppercase font-lora`}
                   >
                     {product.title}
                   </h1>
@@ -44,8 +37,10 @@ const SingleProduct = async ({ params }: { params: { id: string } }) => {
                   <Sizes product={product} />
                 </div>
                 <div className='lg:w-1/2'>
-                  <h3 className='text-xl mb-3'>Description</h3>
-                  <p className='text-justify text-base'>
+                  <p className='md:text-xl mb-3 text-lg font-lora'>
+                    Description
+                  </p>
+                  <p className='text-justify md:text-base text-sm'>
                     {product.description}
                   </p>
                 </div>

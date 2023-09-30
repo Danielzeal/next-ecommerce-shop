@@ -39,6 +39,7 @@ export const PATCH = async (req: NextRequest) => {
         deliveryStatus,
       },
     });
+    return NextResponse.json({ message: "Order updated" }, { status: 200 });
   } catch (error) {
     console.log(error);
     NextResponse.json({ message: "Something went wrong!" });

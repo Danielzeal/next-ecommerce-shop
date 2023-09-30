@@ -42,18 +42,21 @@ const Review = ({ id }: Prop) => {
                     />
                   )}
                   <div>
-                    <h2>{review.user?.name}</h2>
+                    <h2 className='font-lora font-bold capitalize'>
+                      {review.user?.name}
+                    </h2>
                     <Rating value={review.rating} />
                   </div>
                 </div>
               </div>
             ))
           ) : (
-            <p>No review added to this product yet!</p>
+            <p className='font-lora font-semibold text-center'>
+              No review added to this product yet!
+            </p>
           )}
         </div>
       )}
-
       <ReviewForm id={id} />
     </>
   );

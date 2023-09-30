@@ -51,7 +51,9 @@ const ReviewForm = ({ id }: Prop) => {
   };
   return status === "authenticated" ? (
     <div className='w-full md:w-1/2'>
-      <h1 className='pb-6 font-bold text-2xl'>Add Review</h1>
+      <h1 className='pb-6 font-bold md:text-2xl font-lora text-lg'>
+        Add Review
+      </h1>
       <form onSubmit={handleSubmit}>
         <textarea
           name='comment'
@@ -85,7 +87,7 @@ const ReviewForm = ({ id }: Prop) => {
     </div>
   ) : (
     <div>
-      <h1 className='text-xl'>Login to add comment</h1>
+      <h1 className='text-lg font-semibold font-lora'>Login to add comment</h1>
       <Link href={"/login"} className='font-bold text-blue-400'>
         Login
       </Link>

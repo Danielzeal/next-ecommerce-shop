@@ -12,7 +12,7 @@ export default function Home({ searchParams }: Props) {
   const pageNumber: number = Number(searchParams.page) || 1;
 
   return (
-    <div className='min-h-[calc(100vh-160px)] mb-6'>
+    <div className='min-h-[calc(100vh-160px)] mb-6 overflow-hidden'>
       <HeroSection />
       <Container>
         <Products pageNumber={pageNumber} />

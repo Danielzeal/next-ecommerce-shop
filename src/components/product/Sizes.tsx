@@ -44,9 +44,11 @@ const Sizes = ({ product }: Props) => {
   return (
     <>
       <div className='flex flex-col gap-3'>
-        <h3 className='text-2xl text-green-400'>${product.price}</h3>
+        <h3 className='md:text-2xl text-lg text-green-400 font-lora'>
+          ${product.price}
+        </h3>
         <div className='flex flex-col gap-4'>
-          <div className='flex gap-3 items-center text-xl'>
+          <div className='flex gap-3 items-center md:text-xl font-semibold'>
             {product.sizes?.map((size, index) => (
               <button
                 key={size}
@@ -61,7 +63,9 @@ const Sizes = ({ product }: Props) => {
               </button>
             ))}
           </div>
-          <h3 className='text-xl capitalize'>{product.catName}</h3>
+          <h3 className='md:text-xl font-semibold capitalize font-lora'>
+            {product.catName}
+          </h3>
           <div className='flex flex-col gap-2'>
             <Rating value={product.rating} />{" "}
             {product.numReview >= 1 && (

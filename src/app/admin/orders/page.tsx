@@ -65,26 +65,28 @@ const AllOrders = () => {
   return (
     <Container>
       <div className=' bg-white my-6 p-8 rounded-md shadow-md overflow-hidden'>
-        <h1 className='text-center text-2xl font-bold mb-6'>Orders</h1>
+        <h1 className='text-center md:text-2xl text-lg font-lora font-bold mb-6'>
+          Orders
+        </h1>
         {orders.length ? (
           <>
             <table className='w-full table-fixed border-b-2 border-gray-200'>
               <thead>
-                <tr className='text-center text-xl font-semibold'>
+                <tr className='text-center md:text-xl text-lora font-semibold'>
                   <td className='text-start w-[300px] lg:w-full'>ID</td>
                   <td className='w-[300px]'>DILIVERY STATUS</td>
                   <td className='w-[150px]'>DATE</td>
                   <td className='w-[150px]'>AMOUNT</td>
-                  <td></td>
+                  <td className='w-[200px]'></td>
                 </tr>
               </thead>
               <tbody className=''>
                 {orders.map((order: Orders) => (
                   <tr
                     key={order.id}
-                    className='border-t-2 border-gray-300 text-center'
+                    className='border-t-2 border-gray-300 text-center odd:bg-gray-200 even:bg-gray-100 capitalize'
                   >
-                    <td>{order.id}</td>
+                    <td className='text-start'>{order.id}</td>
                     <td>{order.deliveryStatus}</td>
                     <td>{order.createdAt.slice(0, 10)}</td>
                     <td>{order.amount}</td>
@@ -94,6 +96,7 @@ const AllOrders = () => {
                         className='flex gap-2 items-center justify-between'
                       >
                         <select
+                          className='capitalize flex-1 p-2'
                           name='status'
                           id='status'
                           onChange={(e) => setDeliveryStatus(e.target.value)}
@@ -101,7 +104,7 @@ const AllOrders = () => {
                           <option value=''>{order.deliveryStatus}</option>
                           <option value='delivered'>Delivered</option>
                         </select>
-                        <button className='bg-green-500 text-white font-semibold'>
+                        <button className='bg-green-500 text-white font-semibold p-2 rounded-md'>
                           Submit
                         </button>
                       </form>

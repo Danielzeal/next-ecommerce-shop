@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Montserrat, Lora } from "next/font/google";
 import AuthProvider from "@/Provider/AuthProvider";
 import QueryProvider from "@/Provider/QueryProvider";
 import Footer from "@/components/Footer";
@@ -12,8 +12,15 @@ const montserrat = Montserrat({
   style: ["italic", "normal"],
 });
 
+const lora = Lora({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  style: ["italic", "normal"],
+  variable: "--font-lora",
+});
+
 export const metadata: Metadata = {
-  title: "UniQHub",
+  title: "UniqHub",
   description: "Your everyday shop for fashion wears",
 };
 
@@ -24,7 +31,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={`${montserrat.className}`}>
+      <body className={`${montserrat.className} ${lora.variable}`}>
         <AuthProvider>
           <QueryProvider>
             <div className='flex flex-col min-h-screen'>

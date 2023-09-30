@@ -88,7 +88,7 @@ const CheckoutClient = () => {
         <div className='text-center text-red-500'>Error occured! Try agian</div>
       )}
       {paySuccess && (
-        <div className='text-center text-teal-500'>
+        <div className='text-center text-teal-500 flex flex-col items-center justify-center'>
           <h3>Payment Success</h3>
           <div className='w-full max-w-[150px]'>
             <Button

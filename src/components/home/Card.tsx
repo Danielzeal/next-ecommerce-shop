@@ -17,7 +17,7 @@ const Card = ({ product }: { product: Product }) => {
           className='object-cover group-hover:scale-110 transition-transform duration-200 ease-in'
         />
       </div>
-      <h2 className='text-center font-semibold text-lg pb-2 pt-4'>
+      <h2 className='text-center font-semibold md:text-lg pb-2 pt-4 font-lora'>
         {product.title}
       </h2>
       <div className='flex justify-center items-center'>

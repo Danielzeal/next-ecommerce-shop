@@ -28,6 +28,8 @@ const Products = ({ searchParams }: Props) => {
     }
   }, [authUser, router, status]);
 
+  useEffect(() => {}, [pageNumber]);
+
   const { isLoading, data } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
@@ -47,19 +49,21 @@ const Products = ({ searchParams }: Props) => {
     return <Loading />;
   }
 
-  if (data) {
-    console.log(data);
-  }
-
   return (
     <Container>
-      <div className=' bg-white my-6 p-8 rounded-md shadow-md overflow-hidden'>
+      <div className=' bg-white my-6 p-8 rounded-md shadow-md overflow-x-auto no-scrollbar'>
         <button className='bg-green-500 text-white p-3 rounded-md uppercase text-semibold flex items-center gap-3'>
           <Link href='/admin/product/add'>Create Product</Link>
           <FaPlus />
         </button>
-        <h1 className='text-center text-2xl font-bold mb-6'>Products</h1>
-        <AdminProducts products={data.products} />
+        <h1 className='text-center md:text-2xl text-lg font-lora font-bold mb-6'>
+          Products
+        </h1>
+        <AdminProducts
+          products={data.products}
+          pageNumber={pageNumber}
+          count={data.pageCount}
+        />
       </div>
     </Container>
   );

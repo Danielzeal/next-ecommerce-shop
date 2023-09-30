@@ -62,3 +62,15 @@ export const getSliderProducts = async () => {
     console.log(error);
   }
 };
+
+export const getOrders = async () => {
+  const res = await fetch(`${BASEURL}/api/orders`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Something went wrong");
+  }
+
+  return res.json();
+};

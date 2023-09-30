@@ -50,18 +50,18 @@ const HeroSlider = ({ products }: Props) => {
             <Slider product={product} idx={idx} currentSlide={currentSlide} />
           </Fragment>
         ))}
-      <div className='w-full absolute z-20 top-[250px] flex justify-between px-6'>
+      <div className='w-full absolute z-20 h-full flex justify-between items-center px-6'>
         <button
           onClick={handlePrev}
-          className='bg-black h-[48px] w-[48px] rounded-full text-white flex items-center justify-center hover:bg-white hover:text-black transition-colors duration-200 ease-in'
+          className='bg-black md:h-[48px] md:w-[48px] w-8 h-8 md:text-2xl text-lg hover:opacity-100 rounded-full text-white flex items-center justify-center hover:bg-white hover:text-black transition-all duration-200 ease-in opacity-30'
         >
-          <FaArrowLeft size={24} />
+          <FaArrowLeft />
         </button>
         <button
           onClick={handleNext}
-          className='bg-black h-[48px] w-[48px] rounded-full text-white flex items-center justify-center hover:bg-white hover:text-black transition-colors duration-200 ease-in'
+          className='bg-black md:h-[48px] md:w-[48px] w-8 h-8 md:text-2xl text-lg rounded-full opacity-30 hover:opacity-100 text-white flex items-center justify-center hover:bg-white hover:text-black transition-all duration-200 ease-in'
         >
-          <FaArrowRight size={24} />
+          <FaArrowRight />
         </button>
       </div>
     </>

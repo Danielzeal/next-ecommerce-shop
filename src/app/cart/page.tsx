@@ -41,13 +41,15 @@ const CartPage = () => {
 
   return (
     <Container>
-      <div className=' bg-white my-6 p-8 rounded-md shadow-md overflow-hidden'>
-        <h1 className='text-center text-2xl font-bold mb-6'>Collected Items</h1>
+      <div className=' bg-white my-6 p-8 rounded-md shadow-md overflow-x-scroll no-scrollbar'>
+        <h1 className='text-center md:text-2xl text-lg font-bold mb-6 font-lora'>
+          Collected Items
+        </h1>
         {products.length ? (
           <>
             <table className='w-full table-fixed border-b-2 border-gray-200'>
               <thead>
-                <tr className='text-center text-xl font-semibold'>
+                <tr className='text-center md:text-xl font-semibold font-lora'>
                   <td className='text-start w-[300px] xl:w-full'>Product</td>
                   <td className='w-[150px]'>Size</td>
                   <td className='w-[150px]'>Price</td>
@@ -117,7 +119,7 @@ const CartPage = () => {
               Clear
             </button>
             <div className='flex w-[200px] flex-col py-2 border-t-2 border-gray-200 gap-3'>
-              <div className='flex justify-between items-center font-bold'>
+              <div className='flex justify-between items-center font-bold font-lora'>
                 <p>Total</p>
                 <p>$ {total.toFixed(2)}</p>
               </div>
@@ -125,7 +127,7 @@ const CartPage = () => {
             </div>
           </>
         ) : (
-          <h2 className='font-bold text-center text-xl'>
+          <h2 className='font-bold text-center capitalize md:text-xl text-lg'>
             Shopping cart is Empty...
           </h2>
         )}

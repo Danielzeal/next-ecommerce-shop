@@ -9,13 +9,13 @@ const Category = async ({ catName }: Prop) => {
   const categories: CategoryType[] = await getCategories();
 
   return (
-    <div className='flex gap-8 mt-6 overflow-hidden'>
+    <div className='flex gap-8 mt-6 overflow-x-scroll no-scrollbar'>
       {categories &&
         categories.map((category) => (
           <div key={category.id} className='group'>
             <Link
               href={`/category/${category.name}`}
-              className='uppercase font-semibold text-lg'
+              className='uppercase font-semibold md:text-lg text-sm'
             >
               {category.name}
             </Link>
