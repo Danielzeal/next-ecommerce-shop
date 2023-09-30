@@ -24,7 +24,6 @@ export const POST = async (req: NextRequest) => {
     try {
       const body = await req.json();
       const { items, payment_intent_id } = body;
-      console.log(body);
 
       const total = calculateOrderAmount(items) * 100;
 
@@ -35,6 +34,7 @@ export const POST = async (req: NextRequest) => {
         products: items,
         user: { connect: { email: session.user.email! } },
       };
+      console.log(orderData);
 
       // create new order
       if (payment_intent_id) {
@@ -42,12 +42,13 @@ export const POST = async (req: NextRequest) => {
           payment_intent_id
         );
 
+        console.log(payment_intent_id);
         if (current_intent) {
           const update_intent = await stripe.paymentIntents.update(
             payment_intent_id,
             { amount: total }
           );
-
+          console.log(current_intent);
           // update order
           const [existing_order, update_order] = await Promise.all([
             prisma.order.findFirst({
@@ -88,6 +89,7 @@ export const POST = async (req: NextRequest) => {
         if (paymentIntent) {
           orderData.paymentIntentId = paymentIntent.id;
         }
+        console.log(orderData);
 
         // create new order
         await prisma.order.create({
