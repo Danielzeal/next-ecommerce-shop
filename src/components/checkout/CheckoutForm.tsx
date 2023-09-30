@@ -72,7 +72,7 @@ const CheckoutForm = ({ client, handleSuccess }: Props) => {
           id=''
           options={{
             mode: "shipping",
-            allowedCountries: ["US", "NG", "KE", "GH", "EN"],
+            allowedCountries: ["US", "NG", "KE", "GH"],
           }}
         />
         <h2 className='font-semibold mt-4 mb-2'>Payment Information</h2>
