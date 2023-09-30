@@ -34,7 +34,9 @@ const Slider = ({ product, idx, currentSlide }: Props) => {
         <div className='absolute top-0 left-0 w-full h-full flex items-center justify-center flex-col text-white'>
           <Link
             href={`/product/${product.id}`}
-            className='flex flex-col gap-4 md:max-w-xl w-full mx-auto items-center p-4 md:rounded-md md:shadow-md text-center bg-opacity-black cursor-pointer'
+            className={`flex flex-col gap-4 md:max-w-xl w-full mx-auto items-center p-4 md:rounded-md md:shadow-md text-center bg-opacity-black cursor-pointer ${
+              currentSlide === idx ? "" : "-z-10"
+            }`}
           >
             <h1 className='md:text-2xl text-xl uppercase font-semibold font-lora'>
               {product.title}

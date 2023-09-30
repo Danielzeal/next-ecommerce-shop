@@ -50,7 +50,7 @@ const HeroSlider = ({ products }: Props) => {
             <Slider product={product} idx={idx} currentSlide={currentSlide} />
           </Fragment>
         ))}
-      <div className='w-full absolute z-20 h-full flex justify-between md:items-center items-end px-6'>
+      <div className='w-full absolute z-20 h-full flex justify-between md:items-center items-end px-6 py-8 md:py-0'>
         <button
           onClick={handlePrev}
           className='bg-black md:h-[48px] md:w-[48px] w-8 h-8 md:text-2xl text-lg hover:opacity-100 rounded-full text-white flex items-center justify-center hover:bg-white hover:text-black transition-all duration-200 ease-in opacity-30'

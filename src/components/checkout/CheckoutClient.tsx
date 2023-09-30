@@ -30,11 +30,8 @@ const CheckoutClient = () => {
   }, []);
 
   useEffect(() => {
-    if (clientSecret) return;
-  }, [clientSecret]);
-
-  useEffect(() => {
     const getPaymentIntent = async () => {
+      if (clientSecret) return;
       if (products) {
         setError(false);
         setLoading(true);
@@ -60,13 +57,12 @@ const CheckoutClient = () => {
           }
         } catch (error) {
           console.log(error);
-          console.log("something went wrong");
         }
       }
     };
 
     getPaymentIntent();
-  }, [products, paymentIntent, router, handleIntent]);
+  }, [products, paymentIntent, router, handleIntent, clientSecret]);
 
   const options: StripeElementsOptions = {
     clientSecret,
@@ -81,7 +77,7 @@ const CheckoutClient = () => {
   };
 
   return (
-    <div className='w-full'>
+    <div className='w-full h-full'>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm client={clientSecret} handleSuccess={handleSuccess} />
