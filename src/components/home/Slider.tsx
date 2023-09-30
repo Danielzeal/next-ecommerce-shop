@@ -33,8 +33,8 @@ const Slider = ({ product, idx, currentSlide }: Props) => {
         />
         <div className='absolute top-0 left-0 w-full h-full flex items-center justify-center flex-col text-white'>
           <Link
-            className='flex flex-col gap-4 max-w-xl mx-auto items-center p-4 rounded-md shadow-md text-center bg-opacity-black cursor-pointer'
             href={`/product/${product.id}`}
+            className='flex flex-col gap-4 md:max-w-xl w-full mx-auto items-center p-4 md:rounded-md md:shadow-md text-center bg-opacity-black cursor-pointer'
           >
             <h1 className='md:text-2xl text-xl uppercase font-semibold font-lora'>
               {product.title}

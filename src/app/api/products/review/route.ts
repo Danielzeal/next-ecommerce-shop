@@ -56,7 +56,10 @@ export const PATCH = async (req: NextRequest) => {
             },
           });
 
-          return NextResponse.json({ message: "Product updated" });
+          return NextResponse.json(
+            { message: "Product updated" },
+            { status: 201 }
+          );
         } else {
           return NextResponse.json(
             { message: "User already reviewesd this product" },

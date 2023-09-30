@@ -5,6 +5,7 @@ import AuthProvider from "@/Provider/AuthProvider";
 import QueryProvider from "@/Provider/QueryProvider";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { ToastContainer } from "react-toastify";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -37,6 +38,7 @@ export default function RootLayout({
             <div className='flex flex-col min-h-screen'>
               <Header />
               <main className='flex-grow bg-gray-300'>{children}</main>
+              <ToastContainer />
               <Footer />
             </div>
           </QueryProvider>
