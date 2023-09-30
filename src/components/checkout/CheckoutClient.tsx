@@ -7,7 +7,6 @@ import { Elements } from "@stripe/react-stripe-js";
 import { StripeElementsOptions, loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import Button from "../Button";
-import Loading from "../Loading";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
@@ -49,7 +48,6 @@ const CheckoutClient = () => {
           handleIntent(data.paymentIntent.id);
         } catch (error) {
           console.log(error);
-          setError(true);
         }
       }
     };
@@ -81,9 +79,9 @@ const CheckoutClient = () => {
           />
         </Elements>
       )}
-      {error && (
+      {/* {error && (
         <div className='text-center text-red-500'>Error occured! Try agian</div>
-      )}
+      )} */}
       {paySuccess && (
         <div className='text-center text-teal-500 flex flex-col items-center justify-center'>
           <h3>Payment Success</h3>
