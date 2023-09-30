@@ -1,6 +1,5 @@
 "use client";
 
-import { useIntentStore } from "@/store/intent";
 import { useCartStore } from "@/store/store";
 import {
   AddressElement,
@@ -16,8 +15,7 @@ type Props = {
 };
 
 const CheckoutForm = ({ client, handleSuccess }: Props) => {
-  const { clearCart } = useCartStore();
-  const { handleIntent } = useIntentStore();
+  const { clearCart, handleIntent } = useCartStore();
   const stripe = useStripe();
   const elements = useElements();
 
@@ -25,7 +23,6 @@ const CheckoutForm = ({ client, handleSuccess }: Props) => {
 
   useEffect(() => {
     useCartStore.persist.rehydrate();
-    useIntentStore.persist.rehydrate();
   }, []);
 
   useEffect(() => {

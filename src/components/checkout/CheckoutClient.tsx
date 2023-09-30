@@ -1,6 +1,5 @@
 "use client";
 
-import { useIntentStore } from "@/store/intent";
 import { useCartStore } from "@/store/store";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -14,9 +13,7 @@ const stripePromise = loadStripe(
 );
 
 const CheckoutClient = () => {
-  const { products } = useCartStore();
-  const { paymentIntent, handleIntent } = useIntentStore();
-
+  const { products, paymentIntent, handleIntent } = useCartStore();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [clientSecret, setClientSecret] = useState("");
@@ -26,12 +23,10 @@ const CheckoutClient = () => {
 
   useEffect(() => {
     useCartStore.persist.rehydrate();
-    useIntentStore.persist.rehydrate();
   }, []);
 
   useEffect(() => {
     const getPaymentIntent = async () => {
-      if (clientSecret) return;
       if (products) {
         setError(false);
         setLoading(true);
@@ -62,7 +57,8 @@ const CheckoutClient = () => {
     };
 
     getPaymentIntent();
-  }, [products, paymentIntent, router, handleIntent, clientSecret]);
+  }, [products, paymentIntent, router, handleIntent]);
+  console.log(paymentIntent);
 
   const options: StripeElementsOptions = {
     clientSecret,

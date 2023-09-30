@@ -4,11 +4,13 @@ import { persist } from "zustand/middleware";
 const INITIAL_STATE = {
   products: [],
   cartItems: 0,
+  paymentIntent: null,
 };
 
 type Cart = {
   products: CartItem[];
   cartItems: number;
+  paymentIntent: string | null;
 };
 
 type Actions = {
@@ -17,6 +19,7 @@ type Actions = {
   incQtyInCart: (item: CartItem) => void;
   decQtyInCart: (item: CartItem) => void;
   clearCart: () => void;
+  handleIntent: (val: string | null) => void;
 };
 
 export const useCartStore = create(
@@ -101,6 +104,11 @@ export const useCartStore = create(
         set((state) => ({
           products: [],
           cartItems: 0,
+        }));
+      },
+      handleIntent: (val) => {
+        set(() => ({
+          paymentIntent: val,
         }));
       },
     }),
