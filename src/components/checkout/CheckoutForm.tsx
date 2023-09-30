@@ -49,25 +49,22 @@ const CheckoutForm = ({ client, handleSuccess, setClient }: Props) => {
     if (!stripe || !elements) {
       return;
     }
-    try {
-      setLoading(true);
 
-      const { error } = await stripe?.confirmPayment({
-        elements,
-        redirect: "if_required",
-      });
+    setLoading(true);
 
-      if (!error) {
-        clearCart();
-        handleIntent(null);
-        setClient("");
-      }
+    const { error } = await stripe?.confirmPayment({
+      elements,
+      redirect: "if_required",
+    });
 
-      setLoading(false);
-      handleSuccess(true);
-    } catch (error) {
-      console.log(error);
+    if (!error) {
+      clearCart();
+      handleIntent(null);
+      setClient("");
     }
+
+    setLoading(false);
+    handleSuccess(true);
   };
 
   return (
