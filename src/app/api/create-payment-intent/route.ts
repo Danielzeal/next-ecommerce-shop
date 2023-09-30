@@ -24,6 +24,7 @@ export const POST = async (req: NextRequest) => {
     try {
       const body = await req.json();
       const { items, payment_intent_id } = body;
+      console.log(body);
 
       const total = calculateOrderAmount(items) * 100;
 
@@ -32,7 +33,7 @@ export const POST = async (req: NextRequest) => {
         currency: "usd",
         paymentIntentId: payment_intent_id,
         products: items,
-        user: { connect: { email: "sparkuans@gmail.com" } },
+        user: { connect: { email: session.user.email! } },
       };
 
       // create new order
@@ -92,6 +93,7 @@ export const POST = async (req: NextRequest) => {
         await prisma.order.create({
           data: orderData,
         });
+        console.log(paymentIntent);
 
         return NextResponse.json({ paymentIntent });
       }
