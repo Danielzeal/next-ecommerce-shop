@@ -90,7 +90,10 @@ export const POST = async (req: NextRequest) => {
         return NextResponse.json({ paymentIntent });
       }
     } catch (error) {
-      return NextResponse.json({ msg: "Something went wrong" });
+      return NextResponse.json(
+        { message: "Something went wrong" },
+        { status: 500 }
+      );
     }
   } else {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
