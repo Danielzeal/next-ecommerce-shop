@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { useCartStore } from "@/store/store";
@@ -27,6 +28,8 @@ const CheckoutClient = () => {
 
   useEffect(() => {
     const getPaymentIntent = async () => {
+      setError(false);
+      setLoading(true);
       try {
         const res = await fetch("/api/create-payment-intent", {
           method: "POST",
@@ -49,11 +52,9 @@ const CheckoutClient = () => {
     };
 
     if (products) {
-      setError(false);
-      setLoading(true);
       getPaymentIntent();
     }
-  }, [products, paymentIntent, router, handleIntent]);
+  }, [products, paymentIntent, router]);
 
   const options: StripeElementsOptions = {
     clientSecret,

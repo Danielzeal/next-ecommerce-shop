@@ -91,23 +91,27 @@ const AllOrders = () => {
                     <td>{order.createdAt.slice(0, 10)}</td>
                     <td>{order.amount}</td>
                     <td>
-                      <form
-                        onSubmit={(e) => handleSubmit(e, order.id)}
-                        className='flex gap-2 items-center justify-between'
-                      >
-                        <select
-                          className='capitalize flex-1 p-2'
-                          name='status'
-                          id='status'
-                          onChange={(e) => setDeliveryStatus(e.target.value)}
+                      {order.deliveryStatus === "pending" ? (
+                        <form
+                          onSubmit={(e) => handleSubmit(e, order.id)}
+                          className='flex gap-2 items-center justify-between'
                         >
-                          <option value=''>{order.deliveryStatus}</option>
-                          <option value='delivered'>Delivered</option>
-                        </select>
-                        <button className='bg-green-500 text-white font-semibold p-2 rounded-md'>
-                          Submit
-                        </button>
-                      </form>
+                          <select
+                            className='capitalize flex-1 p-2'
+                            name='status'
+                            id='status'
+                            onChange={(e) => setDeliveryStatus(e.target.value)}
+                          >
+                            <option value=''>{order.deliveryStatus}</option>
+                            <option value='delivered'>Delivered</option>
+                          </select>
+                          <button className='bg-green-500 text-white font-semibold p-2 rounded-md'>
+                            Submit
+                          </button>
+                        </form>
+                      ) : (
+                        <>{order.deliveryStatus}</>
+                      )}
                     </td>
                   </tr>
                 ))}
