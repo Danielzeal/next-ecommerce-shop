@@ -58,13 +58,12 @@ const CheckoutForm = ({ client, handleSuccess, setClient }: Props) => {
     });
 
     if (!error) {
+      setLoading(false);
       clearCart();
       handleIntent(null);
       setClient("");
+      handleSuccess(true);
     }
-
-    setLoading(false);
-    handleSuccess(true);
   };
 
   return (

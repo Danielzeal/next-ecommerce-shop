@@ -27,32 +27,32 @@ const CheckoutClient = () => {
 
   useEffect(() => {
     const getPaymentIntent = async () => {
-      if (products) {
-        setError(false);
-        setLoading(true);
-        try {
-          const res = await fetch("/api/create-payment-intent", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              items: products,
-              payment_intent_id: paymentIntent,
-            }),
-          });
-          setLoading(false);
-          if (res.status === 401) {
-            router.push("/login");
-          }
-          const data = await res.json();
-          setClientSecret(data.paymentIntent.client_secret);
-          handleIntent(data.paymentIntent.id);
-        } catch (error) {
-          console.log(error);
+      try {
+        const res = await fetch("/api/create-payment-intent", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            items: products,
+            payment_intent_id: paymentIntent,
+          }),
+        });
+        setLoading(false);
+        if (res.status === 401) {
+          router.push("/login");
         }
+        const data = await res.json();
+        setClientSecret(data.paymentIntent.client_secret);
+        handleIntent(data.paymentIntent.id);
+      } catch (error) {
+        console.log(error);
       }
     };
 
-    getPaymentIntent();
+    if (products) {
+      setError(false);
+      setLoading(true);
+      getPaymentIntent();
+    }
   }, [products, paymentIntent, router, handleIntent]);
 
   const options: StripeElementsOptions = {
@@ -79,9 +79,9 @@ const CheckoutClient = () => {
           />
         </Elements>
       )}
-      {/* {error && (
+      {error && (
         <div className='text-center text-red-500'>Error occured! Try agian</div>
-      )} */}
+      )}
       {paySuccess && (
         <div className='text-center text-teal-500 flex flex-col items-center justify-center'>
           <h3>Payment Success</h3>
