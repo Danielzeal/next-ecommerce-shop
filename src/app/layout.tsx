@@ -38,7 +38,6 @@ export default function RootLayout({
             <div className='flex flex-col min-h-screen'>
               <Header />
               <main className='flex-grow bg-gray-300'>{children}</main>
-              <ToastContainer />
               <Footer />
             </div>
           </QueryProvider>

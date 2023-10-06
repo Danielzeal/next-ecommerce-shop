@@ -44,7 +44,7 @@ const ToggleMenu = () => {
           </span>
         </Link>
         <div
-          className='flex items-center gap-2 border-2 rounded-full p-2 cursor-pointer'
+          className='flex items-center gap-2 border-2 rounded-full p-2 cursor-pointer hover:bg-white hover:text-white'
           onClick={handleMenu}
         >
           <BsFileArrowDown size={24} />

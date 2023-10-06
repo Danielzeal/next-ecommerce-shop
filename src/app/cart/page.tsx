@@ -108,7 +108,6 @@ const CartPage = () => {
                       <button
                         onClick={() => {
                           removeFromCart({ ...product });
-                          toast.info("Product removed from cart");
                         }}
                       >
                         <FaTrash className='text-red-500' />

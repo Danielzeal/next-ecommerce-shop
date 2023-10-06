@@ -39,7 +39,6 @@ const Sizes = ({ product }: Props) => {
       name: product.title,
       productId: product.id,
     });
-    toast.success("Product added to cart");
     router.push("/cart");
   };
 

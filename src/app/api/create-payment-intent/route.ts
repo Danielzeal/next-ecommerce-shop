@@ -22,7 +22,7 @@ export const POST = async (req: NextRequest) => {
   const body = await req.json();
   const { items, payment_intent_id } = body;
 
-  const total = calculateOrderAmount(items) * 100;
+  const total = calculateOrderAmount(items);
 
   if (!session) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
@@ -38,7 +38,7 @@ export const POST = async (req: NextRequest) => {
       if (current_intent) {
         const update_intent = await stripe.paymentIntents.update(
           payment_intent_id,
-          { amount: calculateOrderAmount(items) * 100 }
+          { amount: 2000 }
         );
         // update order
         const [existing_order, update_order] = await Promise.all([
@@ -70,7 +70,7 @@ export const POST = async (req: NextRequest) => {
     } else {
       // Create a PaymentIntent with the order amount and currency
       const paymentIntent = await stripe.paymentIntents.create({
-        amount: calculateOrderAmount(items) * 100,
+        amount: 2000,
         currency: "usd",
         automatic_payment_methods: {
           enabled: true,
