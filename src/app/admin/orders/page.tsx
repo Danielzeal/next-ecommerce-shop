@@ -56,6 +56,7 @@ const AllOrders = ({ searchParams }: Props) => {
     },
     onSuccess: () => {
       alert("Order updated");
+      setDeliveryStatus("");
     },
   });
 

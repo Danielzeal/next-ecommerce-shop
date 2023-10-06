@@ -44,10 +44,10 @@ const ToggleMenu = () => {
           </span>
         </Link>
         <div
-          className='flex items-center gap-2 border-2 rounded-full p-2 cursor-pointer hover:bg-slate-600 transition-colors duration-200 ease-in'
+          className='flex items-center gap-2 border-2 rounded-full p-2 md:text-2xl text-xl cursor-pointer hover:bg-slate-600 transition-colors duration-200 ease-in'
           onClick={handleMenu}
         >
-          <BsFileArrowDown size={24} />
+          <BsFileArrowDown />
           {data ? (
             <Image
               src={data?.user.image!}
@@ -57,7 +57,7 @@ const ToggleMenu = () => {
               className='rounded-full'
             />
           ) : (
-            <FaRegUserCircle size={32} />
+            <FaRegUserCircle />
           )}
         </div>
       </div>

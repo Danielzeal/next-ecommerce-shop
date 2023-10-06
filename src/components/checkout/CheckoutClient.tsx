@@ -21,9 +21,9 @@ const CheckoutClient = () => {
 
   const router = useRouter();
 
-  // useEffect(() => {
-  //   useCartStore.persist.rehydrate();
-  // }, []);
+  useEffect(() => {
+    useCartStore.persist.rehydrate();
+  }, []);
 
   useEffect(() => {
     const getPaymentIntent = async () => {
