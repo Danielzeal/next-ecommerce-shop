@@ -20,19 +20,19 @@ type Props = {
 };
 
 const AllOrders = ({ searchParams }: Props) => {
-  const { data, status } = useSession();
+  const { data: authData, status } = useSession();
   const [deliveryStatus, setDeliveryStatus] = useState("");
   const router = useRouter();
   const pageNumber: number = Number(searchParams.page) || 1;
 
   useEffect(() => {
-    if (status === "unauthenticated" || !data?.user.isAdmin) {
+    if (status === "unauthenticated" || !authData?.user.isAdmin) {
       router.push("/");
     }
-  }, [data, router, status]);
+  }, [authData, router, status]);
 
-  const { isLoading, data: ordersData } = useQuery({
-    queryKey: ["orders"],
+  const { isLoading, data } = useQuery({
+    queryKey: ["orders", pageNumber],
     queryFn: async () => {
       const res = await fetch(`/api/orders?page=${pageNumber}`);
 
@@ -77,7 +77,7 @@ const AllOrders = ({ searchParams }: Props) => {
         <h1 className='text-center md:text-2xl text-lg font-lora font-bold mb-6'>
           Orders
         </h1>
-        {ordersData?.orders && ordersData?.orders.length > 0 ? (
+        {data?.orders && data?.orders.length > 0 ? (
           <>
             <table className='w-full table-fixed border-b-2 border-gray-200 mb-3'>
               <thead>
@@ -90,7 +90,7 @@ const AllOrders = ({ searchParams }: Props) => {
                 </tr>
               </thead>
               <tbody className=''>
-                {ordersData.map((order: Orders) => (
+                {data.orders.map((order: Orders) => (
                   <tr
                     key={order.id}
                     className='border-t-2 border-gray-300 text-center odd:bg-gray-200 even:bg-gray-100 capitalize'
@@ -126,7 +126,7 @@ const AllOrders = ({ searchParams }: Props) => {
                 ))}
               </tbody>
             </table>
-            <Pagination page={pageNumber} pageCount={ordersData.pageCount} />
+            <Pagination page={pageNumber} pageCount={data.pageCount} />
           </>
         ) : (
           <h2 className='font-bold text-center text-xl w-full'>

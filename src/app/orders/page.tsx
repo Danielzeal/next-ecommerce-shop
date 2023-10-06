@@ -25,7 +25,7 @@ const OrdersPage = ({ searchParams }: Props) => {
   }, [router, status]);
 
   const { data } = useQuery({
-    queryKey: ["orders"],
+    queryKey: ["orders", pageNumber],
     queryFn: async () => {
       const res = await fetch(`/api/orders?page=${pageNumber}`);
 
@@ -58,7 +58,7 @@ const OrdersPage = ({ searchParams }: Props) => {
                 {data.orders.map((order: Orders) => (
                   <tr
                     key={order.id}
-                    className='border-y-2 border-gray-200 odd:bg-gray-200 even:bg-gray-100 text-center'
+                    className='border-y-2 border-gray-200 odd:bg-gray-200 even:bg-gray-100 text-center capitalize'
                   >
                     <td className='text-start py-3'>{order.id}</td>
                     <td>{order.deliveryStatus}</td>
