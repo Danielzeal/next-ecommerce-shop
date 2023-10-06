@@ -38,7 +38,7 @@ const Slider = ({ product, idx, currentSlide }: Props) => {
               currentSlide === idx ? "" : "-z-10"
             }`}
           >
-            <h1 className='md:text-2xl text-xl uppercase font-semibold font-lora'>
+            <h1 className='md:text-2xl text-xl capitalize font-semibold font-lora'>
               {product.title}
             </h1>
             <p className='text-sm md:text-base'>{product.description}</p>

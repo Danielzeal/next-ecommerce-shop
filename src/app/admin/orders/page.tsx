@@ -34,7 +34,7 @@ const AllOrders = ({ searchParams }: Props) => {
   const { isLoading, data: ordersData } = useQuery({
     queryKey: ["orders"],
     queryFn: async () => {
-      const res = await fetch(`/api/orders`);
+      const res = await fetch(`/api/orders?page=${pageNumber}`);
 
       if (!res.ok) {
         throw new Error("Something went wrong");
@@ -77,9 +77,9 @@ const AllOrders = ({ searchParams }: Props) => {
         <h1 className='text-center md:text-2xl text-lg font-lora font-bold mb-6'>
           Orders
         </h1>
-        {ordersData.length ? (
+        {ordersData?.orders && ordersData?.orders.length ? (
           <>
-            <table className='w-full table-fixed border-b-2 border-gray-200'>
+            <table className='w-full table-fixed border-b-2 border-gray-200 mb-3'>
               <thead>
                 <tr className='text-center md:text-xl text-lora font-semibold'>
                   <td className='text-start w-[300px] lg:w-full'>ID</td>

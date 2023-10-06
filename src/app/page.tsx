@@ -14,9 +14,9 @@ export default function Home({ searchParams }: Props) {
   return (
     <div className='min-h-[calc(100vh-160px)] mb-6 overflow-hidden'>
       <HeroSection />
-      <Container>
+      {/* <Container>
         <Products pageNumber={pageNumber} />
-      </Container>
+      </Container> */}
     </div>
   );
 }

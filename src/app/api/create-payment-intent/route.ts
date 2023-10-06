@@ -13,7 +13,6 @@ const calculateOrderAmount: any = (items: CartItem[]) => {
     acc += Number(itemTotal);
     return acc;
   }, 0);
-
   return total;
 };
 
@@ -30,8 +29,6 @@ export const POST = async (req: NextRequest) => {
   }
 
   try {
-    const orderData = {};
-
     // create new order
     if (payment_intent_id) {
       const current_intent = await stripe.paymentIntents.retrieve(
@@ -41,7 +38,7 @@ export const POST = async (req: NextRequest) => {
       if (current_intent) {
         const update_intent = await stripe.paymentIntents.update(
           payment_intent_id,
-          { amount: 200 }
+          { amount: calculateOrderAmount(items) * 100 }
         );
         // update order
         const [existing_order, update_order] = await Promise.all([
@@ -73,7 +70,7 @@ export const POST = async (req: NextRequest) => {
     } else {
       // Create a PaymentIntent with the order amount and currency
       const paymentIntent = await stripe.paymentIntents.create({
-        amount: 200,
+        amount: calculateOrderAmount(items) * 100,
         currency: "usd",
         automatic_payment_methods: {
           enabled: true,
@@ -84,7 +81,7 @@ export const POST = async (req: NextRequest) => {
       if (paymentIntent) {
         await prisma.order.create({
           data: {
-            amount: 100,
+            amount: total,
             currency: "usd",
             paymentIntentId: payment_intent_id,
             products: items,

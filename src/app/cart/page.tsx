@@ -8,6 +8,7 @@ import { FaTrash } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Button from "@/components/Button";
+import { toast } from "react-toastify";
 
 const CartPage = () => {
   const [total, setTotal] = useState(0);
@@ -104,7 +105,12 @@ const CartPage = () => {
                     </td>
                     <td>$ {(product.quantity * product.price).toFixed(2)}</td>
                     <td>
-                      <button onClick={() => removeFromCart({ ...product })}>
+                      <button
+                        onClick={() => {
+                          removeFromCart({ ...product });
+                          toast.info("Product removed from cart");
+                        }}
+                      >
                         <FaTrash className='text-red-500' />
                       </button>
                     </td>

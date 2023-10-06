@@ -14,6 +14,7 @@ const Card = ({ product }: { product: Product }) => {
           src={product.img}
           alt={product.title}
           fill
+          sizes='(min-width: 1280px) 278px, (min-width: 780px) calc(31.04vw - 43px), (min-width: 640px) calc(50vw - 68px), calc(100vw - 56px)'
           className='object-cover group-hover:scale-110 transition-transform duration-200 ease-in'
         />
       </div>

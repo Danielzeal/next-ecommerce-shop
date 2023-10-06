@@ -14,6 +14,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { toast } from "react-toastify";
 
 type Props = {
   client: string;
@@ -57,6 +58,7 @@ const CheckoutForm = ({ client, handleSuccess }: Props) => {
       clearCart();
       handleIntent(null);
       handleSuccess(true);
+      toast.success("Payment successful");
     }
   };
 

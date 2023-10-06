@@ -7,6 +7,7 @@ import Quantity from "../cart/Quantity";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/store/store";
 import Button from "../Button";
+import { toast } from "react-toastify";
 
 type Props = {
   product: Product;
@@ -38,6 +39,7 @@ const Sizes = ({ product }: Props) => {
       name: product.title,
       productId: product.id,
     });
+    toast.success("Product added to cart");
     router.push("/cart");
   };
 

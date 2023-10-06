@@ -1,34 +1,58 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Ecommerce website
 
-## Getting Started
+## Introduction
 
-First, run the development server:
+This website is a fullstack application built using nextjs. This built was built based on knowledge i had acquire from tutorial learnt, so i had to build a project solely with the purpose a getting a self practices work around.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+This project was pick as it's a full stack project so i could get real world views on use of nextjs.
+
+## Technology
+
+The stack used for this projects:
+
+- Nextjs 13.5
+- Firebase 10.3
+- Next Auth 4.23
+- Prisma 5.1
+- React-icons 4.10.1
+- React Loading 2.0
+- React Query 3.39
+- Stripe 13.3
+- Tailwindcss 3.3
+- Typescript 5.1
+- Zustand 4.4
+
+## Get Started
+
+To install it locally using npm:
+
+- Clone this project
+
+```
+$ cd ./project directory
+$ npm install
+$ npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The features on this app includes fuctions seen on modern ecommerce websites
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Image slider
+- Product listing page
+- Comment section
+- Add to cart and remove from cart
+- Product cart display page
+- Admin route which includes:
+  - Deleting product
+  - Adding new product
+  - Managing orders etc.
+- Order page
 
-## Learn More
+## Site Preview
 
-To learn more about Next.js, take a look at the following resources:
+[![Unique Hub webpage](/public/img/uniqhub.png)](https://next-ecommerce-shop-swart.vercel.app/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Project Status
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project is still been improved on.

@@ -14,7 +14,7 @@ export const GET = async (req: NextRequest) => {
   }
 
   try {
-    if (session.user.isAdmin) {
+    if (session?.user.isAdmin) {
       const [count, orders] = await Promise.all([
         prisma.order.count(),
         prisma.order.findMany({
@@ -25,6 +25,10 @@ export const GET = async (req: NextRequest) => {
           skip: ordersPerPage * (page - 1),
         }),
       ]);
+
+      if (!orders) {
+        return NextResponse.json({ message: "Not found" }, { status: 404 });
+      }
 
       return NextResponse.json(
         { orders, pageCount: Math.ceil(count / ordersPerPage) },
@@ -44,6 +48,10 @@ export const GET = async (req: NextRequest) => {
         skip: ordersPerPage * (page - 1),
       }),
     ]);
+
+    if (!orders) {
+      return NextResponse.json({ message: "Not found" }, { status: 404 });
+    }
 
     return NextResponse.json(
       { orders, pageCount: Math.ceil(count / ordersPerPage) },
