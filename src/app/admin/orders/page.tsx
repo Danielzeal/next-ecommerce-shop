@@ -77,7 +77,7 @@ const AllOrders = ({ searchParams }: Props) => {
         <h1 className='text-center md:text-2xl text-lg font-lora font-bold mb-6'>
           Orders
         </h1>
-        {ordersData?.orders && ordersData?.orders.length ? (
+        {ordersData?.orders && ordersData?.orders.length > 0 ? (
           <>
             <table className='w-full table-fixed border-b-2 border-gray-200 mb-3'>
               <thead>

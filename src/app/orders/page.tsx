@@ -43,7 +43,7 @@ const OrdersPage = ({ searchParams }: Props) => {
         <h1 className='text-center md:text-2xl font-bold mb-6 font-lora text-lg'>
           Orders
         </h1>
-        {data?.orders.length > 0 ? (
+        {data?.orders && data?.orders.length > 0 ? (
           <>
             <table className='w-full table-fixed border-b-2 border-gray-200 mb-3'>
               <thead>

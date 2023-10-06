@@ -35,6 +35,7 @@ export const GET = async (req: NextRequest) => {
         { status: 200 }
       );
     }
+
     const [count, orders] = await Promise.all([
       prisma.order.count(),
       prisma.order.findMany({
