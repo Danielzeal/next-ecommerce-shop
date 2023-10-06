@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "UniqHub - Admin",
-  description: "Your everyday shop for fashion wears",
+  description: "Your everyday shop admin session",
 };
 
 export default function AdminLayout({

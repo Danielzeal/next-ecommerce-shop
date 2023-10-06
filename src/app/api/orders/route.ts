@@ -5,7 +5,10 @@ import { NextRequest, NextResponse } from "next/server";
 export const GET = async () => {
   const session = await getAuthSession();
 
-  if (session) {
+  if (!session) {
+    return NextResponse.json({ message: "Unauthorized user" }, { status: 401 });
+  }
+  try {
     if (session.user.isAdmin) {
       const orders = await prisma.order.findMany();
       return NextResponse.json(orders);
@@ -16,8 +19,11 @@ export const GET = async () => {
       },
     });
     return NextResponse.json(orders);
-  } else {
-    return NextResponse.json({ message: "Unauthorized user" }, { status: 401 });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Something went wrong" },
+      { status: 500 }
+    );
   }
 };
 
@@ -42,6 +48,6 @@ export const PATCH = async (req: NextRequest) => {
     return NextResponse.json({ message: "Order updated" }, { status: 200 });
   } catch (error) {
     console.log(error);
-    NextResponse.json({ message: "Something went wrong!" });
+    NextResponse.json({ error: "Something went wrong!" }, { status: 500 });
   }
 };

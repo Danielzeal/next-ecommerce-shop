@@ -18,19 +18,14 @@ import {
 type Props = {
   client: string;
   handleSuccess: (value: boolean) => void;
-  setClient: Dispatch<SetStateAction<string>>;
 };
 
-const CheckoutForm = ({ client, handleSuccess, setClient }: Props) => {
+const CheckoutForm = ({ client, handleSuccess }: Props) => {
   const { clearCart, handleIntent } = useCartStore();
   const stripe = useStripe();
   const elements = useElements();
 
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    useCartStore.persist.rehydrate();
-  }, []);
 
   useEffect(() => {
     if (!stripe) {
@@ -61,7 +56,6 @@ const CheckoutForm = ({ client, handleSuccess, setClient }: Props) => {
       setLoading(false);
       clearCart();
       handleIntent(null);
-      setClient("");
       handleSuccess(true);
     }
   };

@@ -1,5 +1,5 @@
 type Props = {
-  className: string;
+  className?: string;
   text: string;
   onClick: () => void;
   heroBtn?: boolean;

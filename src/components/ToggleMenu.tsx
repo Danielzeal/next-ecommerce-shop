@@ -26,11 +26,10 @@ const ToggleMenu = () => {
   };
 
   const handleLogout = () => {
-    handleMenu();
     signOut();
-    setTimeout(() => {
-      router.push("/");
-    }, 3000);
+    handleMenu();
+
+    router.push("/");
   };
 
   return (

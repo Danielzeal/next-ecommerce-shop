@@ -25,5 +25,7 @@ export const GET = async (
     }
 
     return NextResponse.json(reviews);
-  } catch (error) {}
+  } catch (error) {
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
+  }
 };

@@ -57,7 +57,7 @@ const AllOrders = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>, id: string) => {
     e.preventDefault();
 
-    if (!deliveryStatus) return;
+    if (!deliveryStatus && deliveryStatus === "pending") return;
 
     mutate({ deliveryStatus, id });
   };

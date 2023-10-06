@@ -16,19 +16,17 @@ const stripePromise = loadStripe(
 const CheckoutClient = () => {
   const { products, paymentIntent, handleIntent } = useCartStore();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
   const [clientSecret, setClientSecret] = useState("");
   const [paySuccess, setPaySuccess] = useState(false);
 
   const router = useRouter();
 
-  useEffect(() => {
-    useCartStore.persist.rehydrate();
-  }, []);
+  // useEffect(() => {
+  //   useCartStore.persist.rehydrate();
+  // }, []);
 
   useEffect(() => {
     const getPaymentIntent = async () => {
-      setError(false);
       setLoading(true);
       try {
         const res = await fetch("/api/create-payment-intent", {
@@ -39,6 +37,7 @@ const CheckoutClient = () => {
             payment_intent_id: paymentIntent,
           }),
         });
+
         setLoading(false);
         if (res.status === 401) {
           router.push("/login");
@@ -71,17 +70,10 @@ const CheckoutClient = () => {
   return (
     <div className='w-full h-full'>
       {loading && <div className='text-center font-bold'>Loading...</div>}
-      {clientSecret && (
+      {clientSecret && products && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm
-            client={clientSecret}
-            handleSuccess={handleSuccess}
-            setClient={setClientSecret}
-          />
+          <CheckoutForm client={clientSecret} handleSuccess={handleSuccess} />
         </Elements>
-      )}
-      {error && (
-        <div className='text-center text-red-500'>Error occured! Try agian</div>
       )}
       {paySuccess && (
         <div className='text-center text-teal-500 flex flex-col items-center justify-center'>
@@ -90,7 +82,6 @@ const CheckoutClient = () => {
             <Button
               text='View your orders'
               onClick={() => router.push("/orders")}
-              className=''
             />
           </div>
         </div>
