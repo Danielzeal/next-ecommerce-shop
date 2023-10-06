@@ -46,7 +46,7 @@ export const POST = async (req: NextRequest) => {
       if (current_intent) {
         const update_intent = await stripe.paymentIntents.update(
           payment_intent_id,
-          { amount: total }
+          { amount: 200 }
         );
         // update order
         const [existing_order, update_order] = await Promise.all([

@@ -50,7 +50,7 @@ const CheckoutClient = () => {
       }
     };
 
-    if (products) {
+    if (products.length > 0) {
       getPaymentIntent();
     }
   }, [products, paymentIntent, router]);
@@ -70,7 +70,7 @@ const CheckoutClient = () => {
   return (
     <div className='w-full h-full'>
       {loading && <div className='text-center font-bold'>Loading...</div>}
-      {clientSecret && products && (
+      {clientSecret && products.length > 0 && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm client={clientSecret} handleSuccess={handleSuccess} />
         </Elements>
