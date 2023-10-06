@@ -20,22 +20,17 @@ const calculateOrderAmount: any = (items: CartItem[]) => {
 export const POST = async (req: NextRequest) => {
   const session = await getAuthSession();
 
+  const body = await req.json();
+  const { items, payment_intent_id } = body;
+
+  const total = calculateOrderAmount(items) * 100;
+
   if (!session) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
   try {
-    const body = await req.json();
-    const { items, payment_intent_id } = body;
-    const total = calculateOrderAmount(items) * 100;
-
-    const orderData = {
-      amount: 100,
-      currency: "usd",
-      paymentIntentId: payment_intent_id,
-      products: items,
-      user: { connect: { email: session.user.email! } },
-    };
+    const orderData = {};
 
     // create new order
     if (payment_intent_id) {
@@ -77,7 +72,6 @@ export const POST = async (req: NextRequest) => {
       }
     } else {
       // Create a PaymentIntent with the order amount and currency
-      console.log("hello", total);
       const paymentIntent = await stripe.paymentIntents.create({
         amount: 200,
         currency: "usd",
@@ -85,16 +79,19 @@ export const POST = async (req: NextRequest) => {
           enabled: true,
         },
       });
-      console.log("hello", total);
-      console.log(paymentIntent);
 
-      if (paymentIntent) {
-        orderData.paymentIntentId = paymentIntent.id;
-      }
       // create new order
-      await prisma.order.create({
-        data: orderData,
-      });
+      if (paymentIntent) {
+        await prisma.order.create({
+          data: {
+            amount: 100,
+            currency: "usd",
+            paymentIntentId: payment_intent_id,
+            products: items,
+            user: { connect: { email: session.user.email! } },
+          },
+        });
+      }
 
       return NextResponse.json({ paymentIntent });
     }

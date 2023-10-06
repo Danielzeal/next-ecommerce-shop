@@ -2,6 +2,7 @@
 
 import Container from "@/components/Container";
 import Loading from "@/components/Loading";
+import Pagination from "@/components/home/Pagination";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -11,10 +12,18 @@ type Status = {
   id: string;
   deliveryStatus: string;
 };
-const AllOrders = () => {
+
+type Props = {
+  searchParams: {
+    page: string;
+  };
+};
+
+const AllOrders = ({ searchParams }: Props) => {
   const { data, status } = useSession();
   const [deliveryStatus, setDeliveryStatus] = useState("");
   const router = useRouter();
+  const pageNumber: number = Number(searchParams.page) || 1;
 
   useEffect(() => {
     if (status === "unauthenticated" || !data?.user.isAdmin) {
@@ -22,7 +31,7 @@ const AllOrders = () => {
     }
   }, [data, router, status]);
 
-  const { isLoading, data: orders } = useQuery({
+  const { isLoading, data: ordersData } = useQuery({
     queryKey: ["orders"],
     queryFn: async () => {
       const res = await fetch(`/api/orders`);
@@ -68,7 +77,7 @@ const AllOrders = () => {
         <h1 className='text-center md:text-2xl text-lg font-lora font-bold mb-6'>
           Orders
         </h1>
-        {orders.length ? (
+        {ordersData.length ? (
           <>
             <table className='w-full table-fixed border-b-2 border-gray-200'>
               <thead>
@@ -81,7 +90,7 @@ const AllOrders = () => {
                 </tr>
               </thead>
               <tbody className=''>
-                {orders.map((order: Orders) => (
+                {ordersData.map((order: Orders) => (
                   <tr
                     key={order.id}
                     className='border-t-2 border-gray-300 text-center odd:bg-gray-200 even:bg-gray-100 capitalize'
@@ -117,6 +126,7 @@ const AllOrders = () => {
                 ))}
               </tbody>
             </table>
+            <Pagination page={pageNumber} pageCount={ordersData.pageCount} />
           </>
         ) : (
           <h2 className='font-bold text-center text-xl w-full'>

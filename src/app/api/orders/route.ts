@@ -2,23 +2,53 @@ import { getAuthSession } from "@/util/auth";
 import { prisma } from "@/util/init-prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async () => {
+export const GET = async (req: NextRequest) => {
   const session = await getAuthSession();
+
+  const { searchParams } = new URL(req.url);
+  const page: number = Number(searchParams.get("page")) || 1;
+  const ordersPerPage: number = 15;
 
   if (!session) {
     return NextResponse.json({ message: "Unauthorized user" }, { status: 401 });
   }
+
   try {
     if (session.user.isAdmin) {
-      const orders = await prisma.order.findMany();
-      return NextResponse.json(orders);
+      const [count, orders] = await Promise.all([
+        prisma.order.count(),
+        prisma.order.findMany({
+          orderBy: {
+            createdAt: "desc",
+          },
+          take: ordersPerPage,
+          skip: ordersPerPage * (page - 1),
+        }),
+      ]);
+
+      return NextResponse.json(
+        { orders, pageCount: Math.ceil(count / ordersPerPage) },
+        { status: 200 }
+      );
     }
-    const orders = await prisma.order.findMany({
-      where: {
-        userEmail: session.user.email!,
-      },
-    });
-    return NextResponse.json(orders);
+    const [count, orders] = await Promise.all([
+      prisma.order.count(),
+      prisma.order.findMany({
+        where: {
+          userEmail: session.user.email!,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+        take: ordersPerPage,
+        skip: ordersPerPage * (page - 1),
+      }),
+    ]);
+
+    return NextResponse.json(
+      { orders, pageCount: Math.ceil(count / ordersPerPage) },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json(
       { error: "Something went wrong" },

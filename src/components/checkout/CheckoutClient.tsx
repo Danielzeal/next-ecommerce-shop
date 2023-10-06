@@ -78,7 +78,7 @@ const CheckoutClient = () => {
       {paySuccess && (
         <div className='text-center text-teal-500 flex flex-col items-center justify-center'>
           <h3>Payment Success</h3>
-          <div className='w-full max-w-[150px]'>
+          <div className='w-full'>
             <Button
               text='View your orders'
               onClick={() => router.push("/orders")}
