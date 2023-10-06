@@ -65,8 +65,8 @@ const ToggleMenu = () => {
         <nav className='absolute z-40 w-[200px] p-2 bg-white top-[100px] right-4 shadow-2xl text-black flex flex-col rounded-md'>
           {status === "authenticated" ? (
             <>
-              <p className='text-xl font-semibold'>
-                <span className='text-base'>Welcome</span> <br />
+              <p className='font-semibold capitalize'>
+                <span className='text-sm'>Welcome</span> <br />
                 {data?.user.name}
               </p>
               <hr className='h-[2px]' />
