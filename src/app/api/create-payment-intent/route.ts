@@ -38,7 +38,7 @@ export const POST = async (req: NextRequest) => {
       if (current_intent) {
         const update_intent = await stripe.paymentIntents.update(
           payment_intent_id,
-          { amount: 2000 }
+          { amount: 200 }
         );
         // update order
         const [existing_order, update_order] = await Promise.all([
@@ -69,8 +69,9 @@ export const POST = async (req: NextRequest) => {
       }
     } else {
       // Create a PaymentIntent with the order amount and currency
+      console.log(body);
       const paymentIntent = await stripe.paymentIntents.create({
-        amount: 2000,
+        amount: 200,
         currency: "usd",
         automatic_payment_methods: {
           enabled: true,
