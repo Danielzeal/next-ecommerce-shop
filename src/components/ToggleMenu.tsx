@@ -3,12 +3,14 @@
 import { useEffect, useState } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
 import { HiOutlineShoppingCart } from "react-icons/hi";
+import { BsFileArrowDown } from "react-icons/bs";
 import Links from "./Links";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/store/store";
 import Link from "next/link";
 import Image from "next/image";
+import Horizontal from "./Horizontal";
 
 const ToggleMenu = () => {
   const [toggle, setToggle] = useState(false);
@@ -45,6 +47,7 @@ const ToggleMenu = () => {
           className='flex items-center gap-2 border-2 rounded-full p-2 cursor-pointer'
           onClick={handleMenu}
         >
+          <BsFileArrowDown size={24} />
           {data ? (
             <Image
               src={data?.user.image!}
@@ -62,6 +65,8 @@ const ToggleMenu = () => {
         <nav className='absolute z-40 w-[200px] p-2 bg-white top-[100px] right-4 shadow-2xl text-black flex flex-col rounded-md'>
           {status === "authenticated" ? (
             <>
+              <span>{data?.user.name}</span>
+              <Horizontal />
               {data?.user?.isAdmin ? (
                 <Links href='/admin' onClick={handleMenu}>
                   Admin
@@ -71,7 +76,7 @@ const ToggleMenu = () => {
                   My Order
                 </Links>
               )}
-              <hr />
+              <Horizontal />
               <Links href='/' onClick={handleLogout}>
                 Logout
               </Links>

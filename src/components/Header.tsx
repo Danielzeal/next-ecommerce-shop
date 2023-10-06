@@ -9,7 +9,7 @@ const Header = () => {
       <header className='bg-black h-20 text-white sticky top-0 z-50 w-full'>
         <Container>
           <div className='flex items-center justify-between h-full relative'>
-            <h1 className='font-bold text-xl text-white uppercase'>
+            <h1 className='font-bold text-xl text-white uppercase font-lora'>
               <Link href={"/"}>UniQHub</Link>
             </h1>
             {/* <form className='items-center gap-1 hidden sm:flex'>
