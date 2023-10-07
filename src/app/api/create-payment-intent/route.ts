@@ -7,7 +7,9 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2023-08-16",
 });
 
-const calculateOrderAmount: any = (items: CartItem[]) => {
+type CalculateOrderAmount = (val: CartItem[]) => number;
+
+const calculateOrderAmount: CalculateOrderAmount = (items) => {
   const total = items.reduce((acc, curr) => {
     const itemTotal = (curr.quantity * curr.price).toFixed(2);
     acc += Number(itemTotal);
@@ -22,7 +24,7 @@ export const POST = async (req: NextRequest) => {
   const body = await req.json();
   const { items, payment_intent_id } = body;
 
-  // const total = calculateOrderAmount(items);
+  const total = calculateOrderAmount(items);
 
   if (!session) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
@@ -38,7 +40,7 @@ export const POST = async (req: NextRequest) => {
       if (current_intent) {
         const update_intent = await stripe.paymentIntents.update(
           payment_intent_id,
-          { amount: 200 }
+          { amount: total * 100 }
         );
         // update order
         const [existing_order, update_order] = await Promise.all([
@@ -52,7 +54,7 @@ export const POST = async (req: NextRequest) => {
               paymentIntentId: payment_intent_id,
             },
             data: {
-              amount: 200,
+              amount: total,
               products: items,
             },
           }),
@@ -70,7 +72,7 @@ export const POST = async (req: NextRequest) => {
     } else {
       // Create a PaymentIntent with the order amount and currency
       const paymentIntent = await stripe.paymentIntents.create({
-        amount: 200,
+        amount: total * 100,
         currency: "usd",
         automatic_payment_methods: {
           enabled: true,
