@@ -69,8 +69,6 @@ export const POST = async (req: NextRequest) => {
       }
     } else {
       // Create a PaymentIntent with the order amount and currency
-      console.log("hello");
-      console.log(body);
       const paymentIntent = await stripe.paymentIntents.create({
         amount: 200,
         currency: "usd",
@@ -78,18 +76,18 @@ export const POST = async (req: NextRequest) => {
           enabled: true,
         },
       });
-      console.log("can't", paymentIntent);
       //create new order
       if (paymentIntent) {
-        await prisma.order.create({
-          data: {
-            amount: 200,
-            currency: "usd",
-            paymentIntentId: payment_intent_id,
-            products: items,
-            user: { connect: { email: session.user.email! } },
-          },
-        });
+        // await prisma.order.create({
+        //   data: {
+        //     amount: 200,
+        //     currency: "usd",
+        //     paymentIntentId: payment_intent_id,
+        //     products: items,
+        //     user: { connect: { email: session.user.email! } },
+        //   },
+        // });
+        console.log("Sending data", paymentIntent);
         return NextResponse.json({ paymentIntent });
       }
     }
