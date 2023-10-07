@@ -80,24 +80,16 @@ export const POST = async (req: NextRequest) => {
       });
       //create new order
       if (paymentIntent) {
-        const order = await prisma.order.create({
+        await prisma.order.create({
           data: {
             amount: total,
             currency: "usd",
-            paymentIntentId: payment_intent_id,
+            paymentIntentId: paymentIntent.id,
             products: items,
             user: { connect: { email: session.user.email! } },
           },
         });
-
-        if (order) {
-          return NextResponse.json({ paymentIntent });
-        } else {
-          return NextResponse.json(
-            { message: "Something went wrong" },
-            { status: 500 }
-          );
-        }
+        return NextResponse.json({ paymentIntent });
       }
     }
   } catch (error) {
