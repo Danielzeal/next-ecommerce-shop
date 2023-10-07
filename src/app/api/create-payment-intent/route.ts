@@ -80,17 +80,24 @@ export const POST = async (req: NextRequest) => {
       });
       //create new order
       if (paymentIntent) {
-        // await prisma.order.create({
-        //   data: {
-        //     amount: 200,
-        //     currency: "usd",
-        //     paymentIntentId: payment_intent_id,
-        //     products: items,
-        //     user: { connect: { email: session.user.email! } },
-        //   },
-        // });
-        console.log("Sending data", paymentIntent);
-        return NextResponse.json({ paymentIntent });
+        const order = await prisma.order.create({
+          data: {
+            amount: total,
+            currency: "usd",
+            paymentIntentId: payment_intent_id,
+            products: items,
+            user: { connect: { email: session.user.email! } },
+          },
+        });
+
+        if (order) {
+          return NextResponse.json({ paymentIntent });
+        } else {
+          return NextResponse.json(
+            { message: "Something went wrong" },
+            { status: 500 }
+          );
+        }
       }
     }
   } catch (error) {
