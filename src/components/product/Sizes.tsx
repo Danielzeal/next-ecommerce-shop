@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import { useCartStore } from "@/store/store";
 import Button from "../Button";
 import { toast } from "react-toastify";
+import Link from "next/link";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 type Props = {
   product: Product;
@@ -39,7 +41,7 @@ const Sizes = ({ product }: Props) => {
       name: product.title,
       productId: product.id,
     });
-    router.push("/cart");
+    toast.success("Product added to cart!");
   };
 
   return (
@@ -84,6 +86,20 @@ const Sizes = ({ product }: Props) => {
         <Button onClick={handleSubmit} text='add to cart' className='w-full' />
       </div>
       <Horizontal />
+      <div className='flex justify-between items-center'>
+        <Link
+          href={"/"}
+          className='p-2 rounded-md hover:bg-slate-400 transition-colors duration-200 ease-in'
+        >
+          <FaArrowLeft /> Continue Shopping
+        </Link>
+        <Link
+          href={"/cart"}
+          className='p-2 rounded-md hover:bg-slate-400 transition-colors duration-200 ease-in'
+        >
+          Visit Cart <FaArrowRight />
+        </Link>
+      </div>
     </>
   );
 };
