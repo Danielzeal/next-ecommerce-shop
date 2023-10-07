@@ -90,7 +90,7 @@ export const POST = async (req: NextRequest) => {
             user: { connect: { email: session.user.email! } },
           },
         });
-        return NextResponse.json({ paymentIntent });
+        return NextResponse.json(paymentIntent);
       }
     }
   } catch (error) {
