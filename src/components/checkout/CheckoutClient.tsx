@@ -39,13 +39,8 @@ const CheckoutClient = () => {
           router.push("/login");
         }
         const data = await res.json();
-        console.log(data);
-        if (data) {
-          setClientSecret(data.paymentIntent.client_secret);
-          handleIntent(data.paymentIntent.id);
-        } else {
-          console.log("Something went wrong");
-        }
+        setClientSecret(data.paymentIntent.client_secret);
+        handleIntent(data.paymentIntent.id);
       } catch (error) {
         console.log(error);
       }
