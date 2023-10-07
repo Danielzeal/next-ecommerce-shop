@@ -69,6 +69,8 @@ export const POST = async (req: NextRequest) => {
       }
     } else {
       // Create a PaymentIntent with the order amount and currency
+      console.log("hello");
+      console.log(body);
       const paymentIntent = await stripe.paymentIntents.create({
         amount: 200,
         currency: "usd",
@@ -76,7 +78,7 @@ export const POST = async (req: NextRequest) => {
           enabled: true,
         },
       });
-
+      console.log("can't");
       //create new order
       if (paymentIntent) {
         await prisma.order.create({
