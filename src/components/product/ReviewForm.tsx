@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { FormEvent, useState } from "react";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 type ReviewData = {
   comment: string;
@@ -22,15 +23,17 @@ const ReviewForm = ({ id }: Prop) => {
 
   const queryClient = useQueryClient();
 
-  const { mutate, isLoading } = useMutation({
+  const { data, mutate, isLoading } = useMutation({
     mutationFn: async ({ comment, rating, id }: ReviewData) => {
-      await fetch("/api/products/review", {
+      const res = await fetch("/api/products/review", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ comment, rating, id }),
       });
+
+      return res.json();
     },
     onSuccess: () => {
       setComment("");
@@ -48,6 +51,7 @@ const ReviewForm = ({ id }: Prop) => {
     if (!comment || !rating) return;
 
     mutate({ comment, rating, id });
+    toast.info(data.message);
   };
   return status === "authenticated" ? (
     <div className='w-full md:w-1/2'>

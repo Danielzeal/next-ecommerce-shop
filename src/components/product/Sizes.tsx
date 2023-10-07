@@ -86,16 +86,16 @@ const Sizes = ({ product }: Props) => {
         <Button onClick={handleSubmit} text='add to cart' className='w-full' />
       </div>
       <Horizontal />
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-center text-xs'>
         <Link
           href={"/"}
-          className='p-2 rounded-md hover:bg-slate-400 transition-colors duration-200 ease-in'
+          className='p-2 rounded-md hover:bg-black hover:text-white transition-colors duration-200 ease-in'
         >
           <FaArrowLeft /> Continue Shopping
         </Link>
         <Link
           href={"/cart"}
-          className='p-2 rounded-md hover:bg-slate-400 transition-colors duration-200 ease-in'
+          className='p-2 rounded-md hover:bg-black hover:text-white transition-colors duration-200 ease-in'
         >
           Visit Cart <FaArrowRight />
         </Link>
