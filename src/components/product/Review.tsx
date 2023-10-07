@@ -51,7 +51,7 @@ const Review = ({ id }: Prop) => {
               </div>
             ))
           ) : (
-            <p className='font-lora font-semibold text-center'>
+            <p className='font-lora font-semibold'>
               No review added to this product yet!
             </p>
           )}
