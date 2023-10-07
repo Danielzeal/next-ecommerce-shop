@@ -78,7 +78,7 @@ export const POST = async (req: NextRequest) => {
           enabled: true,
         },
       });
-      console.log("can't");
+      console.log("can't", paymentIntent);
       //create new order
       if (paymentIntent) {
         await prisma.order.create({
