@@ -55,4 +55,4 @@ The features on this app includes fuctions seen on modern ecommerce websites
 
 ### Project Status
 
-This project is still been improved on.
+This project is still been improve on.
