@@ -59,14 +59,6 @@ const CheckoutForm = ({ client, handleSuccess }: Props) => {
   return (
     <form onSubmit={handleSubmit} id='payment-form'>
       <div>
-        <h2 className='font-semibold mt-4 mb-2'>Address Information</h2>
-        <AddressElement
-          id=''
-          options={{
-            mode: "shipping",
-            allowedCountries: ["US", "NG", "KE", "GH"],
-          }}
-        />
         <h2 className='font-semibold mt-4 mb-2'>Payment Information</h2>
         <PaymentElement id='payment-element' options={{ layout: "tabs" }} />
       </div>

@@ -71,7 +71,6 @@ model Order {
   deliveryStatus  String?  @default("pending")
   user            User     @relation(fields: [userEmail], references: [email])
   userEmail       String
-  address         Json?
 }
 
 model Product {
