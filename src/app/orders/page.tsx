@@ -1,41 +1,19 @@
-"use client";
-
+import getOrders from "@/actions/getOrder";
 import Container from "@/components/Container";
-import Pagination from "@/components/home/Pagination";
-import { useQuery } from "@tanstack/react-query";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { FC } from "react";
+import Orders from "./_component/Orders";
 
 type Props = {
   searchParams: {
-    page: string;
+    [keys: string]: string | string[] | undefined;
   };
 };
 
-const OrdersPage = ({ searchParams }: Props) => {
-  const { status } = useSession();
-  const router = useRouter();
-  const pageNumber: number = Number(searchParams.page) || 1;
+const OrdersPage: FC<Props> = async ({ searchParams }: Props) => {
+  const page =
+    typeof searchParams.page === "string" ? Number(searchParams.page) : 1;
 
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/");
-    }
-  }, [router, status]);
-
-  const { data } = useQuery({
-    queryKey: ["orders", pageNumber],
-    queryFn: async () => {
-      const res = await fetch(`/api/orders?page=${pageNumber}`);
-
-      if (!res.ok) {
-        throw new Error("Something went wrong");
-      }
-
-      return res.json();
-    },
-  });
+  const data = await getOrders(page);
 
   return (
     <Container>
@@ -43,36 +21,7 @@ const OrdersPage = ({ searchParams }: Props) => {
         <h1 className='text-center md:text-2xl font-bold mb-6 font-lora text-lg'>
           Orders
         </h1>
-        {data?.orders && data?.orders.length > 0 ? (
-          <>
-            <table className='w-full table-fixed border-b-2 border-gray-200 mb-3'>
-              <thead>
-                <tr className='md:text-lg font-semibold text-center font-lora'>
-                  <td className='text-start w-[300px] lg:w-full'>ID</td>
-                  <td className='w-[250px]'>DELIVIRY STATUS</td>
-                  <td className='w-[250px]'>AMOUNT</td>
-                  <td className='w-[250px]'>DATE</td>
-                </tr>
-              </thead>
-              <tbody>
-                {data.orders.map((order: Orders) => (
-                  <tr
-                    key={order.id}
-                    className='border-y-2 border-gray-200 odd:bg-gray-200 even:bg-gray-100 text-center capitalize'
-                  >
-                    <td className='text-start py-3'>{order.id}</td>
-                    <td>{order.deliveryStatus}</td>
-                    <td>{order.amount}</td>
-                    <td>{order.createdAt.slice(0, 10)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <Pagination page={pageNumber} pageCount={data.pageCount} />
-          </>
-        ) : (
-          <div>No orders to show</div>
-        )}
+        <Orders page={page} pageCount={data?.pageCount} orders={data?.orders} />
       </div>
     </Container>
   );

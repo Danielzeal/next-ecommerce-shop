@@ -2,13 +2,14 @@
 
 import Button from "@/components/Button";
 import Container from "@/components/Container";
+import { FC } from "react";
 
 type Props = {
   error: Error;
   reset: () => void;
 };
 
-const ErrorPage = ({ error, reset }: Props) => {
+const ErrorPage: FC<Props> = ({ error, reset }: Props) => {
   return (
     <Container>
       <div className='w-full h-[calc(100vh-160px)] items-center justify-center flex'>

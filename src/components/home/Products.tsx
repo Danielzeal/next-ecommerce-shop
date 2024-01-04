@@ -1,40 +1,31 @@
-import { Fragment } from "react";
+import { FC, Fragment } from "react";
 import Card from "./Card";
 import Pagination from "./Pagination";
 import Category from "./Category";
-import { getProducts } from "@/services";
+import getHomeProducts from "@/actions/getHomeProducts";
 
-type Data = {
-  products: Products;
-  pageCount: number;
+type Props = {
+  page: number;
+  category?: string;
 };
 
-const Products = async ({
-  pageNumber,
-  category,
-}: {
-  pageNumber: number;
-  category?: string;
-}) => {
-  const { products, pageCount }: Data = await getProducts(
-    pageNumber,
-    String(category)
-  );
+const Products: FC<Props> = async ({ page, category }) => {
+  const data = await getHomeProducts(page, category);
 
   return (
     <>
-      {products.length > 0 ? (
+      {data && data.products.length > 0 ? (
         <>
           <Category catName={category!} />
           <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 my-8'>
-            {products &&
-              products.map((product) => (
+            {data.products &&
+              data.products.map((product) => (
                 <Fragment key={product.id}>
                   <Card product={product} />
                 </Fragment>
               ))}
           </div>
-          <Pagination page={pageNumber} pageCount={pageCount} />
+          <Pagination page={page} pageCount={data.pageCount} />
         </>
       ) : (
         <div className='w-full bg-white md:p-8 p-4 rounded-md mt-[120px] shadow-md'>

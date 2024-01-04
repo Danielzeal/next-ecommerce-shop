@@ -10,13 +10,15 @@ const Card = ({ product }: { product: Product }) => {
       className='bg-gray-200 p-3 group group-hover:bg-gray-100 hover:shadow-lg text-gray-900 transition-all duration-200 ease-in-out'
     >
       <div className='relative h-[300px] w-full overflow-hidden'>
-        <Image
-          src={product.img}
-          alt={product.title}
-          fill
-          sizes='(min-width: 1280px) 278px, (min-width: 780px) calc(31.04vw - 43px), (min-width: 640px) calc(50vw - 68px), calc(100vw - 56px)'
-          className='object-cover group-hover:scale-110 transition-transform duration-200 ease-in'
-        />
+        {product.img && (
+          <Image
+            src={product.img}
+            alt={product.title}
+            fill
+            sizes='(min-width: 1280px) 278px, (min-width: 780px) calc(31.04vw - 43px), (min-width: 640px) calc(50vw - 68px), calc(100vw - 56px)'
+            className='object-cover group-hover:scale-110 transition-transform duration-200 ease-in'
+          />
+        )}
       </div>
       <h2 className='text-center font-semibold md:text-lg pb-2 pt-4 font-lora'>
         {product.title}

@@ -3,11 +3,11 @@ import Sizes from "@/components/product/Sizes";
 import Image from "next/image";
 import Horizontal from "@/components/Horizontal";
 import Review from "@/components/product/Review";
-import { getProduct } from "@/services";
+import getProduct from "@/actions/getProduct";
 
 const SingleProduct = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
-  const product: Product = await getProduct(id);
+  const product = await getProduct(id);
 
   return (
     <Container>
@@ -16,13 +16,15 @@ const SingleProduct = async ({ params }: { params: { id: string } }) => {
           <div className='flex flex-col md:flex-row gap-12 w-full my-6 bg-white sm:p-8 p-4 rounded-md'>
             <div className='w-full md:w-1/2 lg:w-1/3'>
               <div className='relative w-full md:h-[550px] sm:h-[400px] h-[300px] '>
-                <Image
-                  src={product.img}
-                  alt={product.title}
-                  className='object-cover'
-                  fill
-                  sizes='100vw'
-                />
+                {product.img && (
+                  <Image
+                    src={product.img}
+                    alt={product.title}
+                    className='object-cover'
+                    fill
+                    sizes='100vw'
+                  />
+                )}
               </div>
             </div>
             <div className='w-full md:w-1/2 lg:w-2/3'>

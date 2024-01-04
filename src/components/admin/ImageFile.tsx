@@ -26,39 +26,40 @@ const ImageFile = ({ setImgFile }: Prop) => {
   const [progress, setProgress] = useState<number | null>(null);
 
   useEffect(() => {
-    if (file) {
-      const upload = async () => {
-        const fileName = new Date().getTime + file.name;
-        const storageRef = ref(storage, fileName);
+    const upload = async (file: any) => {
+      const fileName = new Date().getTime + file.name;
+      const storageRef = ref(storage, fileName);
 
-        const uploadTask = uploadBytesResumable(storageRef, file);
+      const uploadTask = uploadBytesResumable(storageRef, file);
 
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            const progress =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            setProgress(progress);
-            switch (snapshot.state) {
-              case "paused":
-                console.log("Upload is paused");
-                break;
-              case "running":
-                console.log("Upload is running");
-                break;
-            }
-          },
-          (error) => {
-            console.log(error);
-          },
-          () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              setImgFile(downloadURL);
-            });
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setProgress(progress);
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
           }
-        );
-      };
-      upload();
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setImgFile(downloadURL);
+          });
+        }
+      );
+    };
+
+    if (file) {
+      upload(file);
     }
   }, [file, setImgFile]);
 

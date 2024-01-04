@@ -1,16 +1,17 @@
 import Container from "@/components/Container";
 import Products from "@/components/home/Products";
+import { FC } from "react";
 
 type Props = {
   searchParams: {
-    page: string;
+    [key: string]: string | string[] | undefined;
   };
   params: {
     category: string;
   };
 };
 
-const ProductsPage = ({ searchParams, params }: Props) => {
+const ProductsPage: FC<Props> = ({ searchParams, params }) => {
   const pageNumber: number = Number(searchParams.page) || 1;
   const { category } = params;
 

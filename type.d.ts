@@ -1,10 +1,10 @@
 type Product = {
   id: string;
   title: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
   description: string;
-  img: string;
+  img: string | null;
   price: number;
   sizes: string[];
   catName: string;

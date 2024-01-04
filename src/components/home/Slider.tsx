@@ -7,7 +7,7 @@ type Props = {
   product: {
     id: string;
     title: string;
-    img: string;
+    img: string | null;
     price: number;
     description: string;
   };
@@ -25,12 +25,14 @@ const Slider = ({ product, idx, currentSlide }: Props) => {
             : "opacity-0 -translate-x-[50%]"
         }`}
       >
-        <Image
-          fill
-          src={product.img}
-          alt={product.title}
-          className='font-semibold object-cover filter grayscale brightness-50'
-        />
+        {product.img && (
+          <Image
+            fill
+            src={product.img}
+            alt={product.title}
+            className='font-semibold object-cover filter grayscale brightness-50'
+          />
+        )}
         <div className='absolute top-0 left-0 w-full h-full flex items-center justify-center flex-col text-white'>
           <Link
             href={`/product/${product.id}`}

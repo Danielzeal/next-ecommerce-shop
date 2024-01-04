@@ -8,23 +8,25 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 type Products = {
   id: string;
   title: string;
-  img: string;
+  img: string | null;
   price: number;
   description: string;
 };
 
 type Props = {
-  products: Products[];
+  products?: Products[];
 };
 
 const HeroSlider = ({ products }: Props) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const productLength = products?.length - 1;
+  const productLength = products && products?.length - 1;
   const autoScroll = true;
   let startScroll: number | NodeJS.Timeout | undefined;
 
   const handlePrev = () => {
-    setCurrentSlide((prev) => (currentSlide === 0 ? productLength : prev - 1));
+    setCurrentSlide((prev) =>
+      currentSlide === 0 ? Number(productLength) : prev - 1
+    );
   };
 
   const handleNext = () => {
