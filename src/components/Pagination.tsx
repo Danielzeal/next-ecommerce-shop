@@ -17,7 +17,7 @@ const Pagination = ({
         {page !== 1 && (
           <button
             className={`py-3 px-6 bg-black text-white`}
-            onClick={() => router.push(`?page=${page - 1}`)}
+            onClick={() => router.push(`/products?page=${page - 1}`)}
           >
             Prev
           </button>
@@ -27,7 +27,7 @@ const Pagination = ({
           <button
             key={num}
             disabled={page === num + 1}
-            onClick={() => router.push(`?page=${num + 1}`)}
+            onClick={() => router.push(`/products?page=${num + 1}`)}
             className={`py-3 px-4 ${
               page === num + 1
                 ? "bg-gray-400 text-gray-100"
@@ -41,7 +41,7 @@ const Pagination = ({
         {page !== pageCount && (
           <button
             className={`py-3 px-6 bg-black text-white`}
-            onClick={() => router.push(`?page=${page + 1}`)}
+            onClick={() => router.push(`/products?page=${page + 1}`)}
           >
             Next
           </button>

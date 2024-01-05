@@ -14,7 +14,7 @@ const Category = async ({ catName }: Prop) => {
         categories.map((category) => (
           <div key={category.id} className='group'>
             <Link
-              href={`/category?category=${category.name}`}
+              href={`/products?category=${category.name}`}
               className='uppercase font-semibold md:text-lg text-sm'
             >
               {category.name}
