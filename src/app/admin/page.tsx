@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { FaPlus } from "react-icons/fa";
 import Link from "next/link";
 import Loading from "@/components/Loading";
-import AdminProducts from "@/components/admin/AdminProducts";
+import AdminProducts from "@/app/admin/_components/AdminProducts";
 import { useQuery } from "@tanstack/react-query";
 
 type Props = {

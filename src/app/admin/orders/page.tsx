@@ -2,7 +2,7 @@
 
 import Container from "@/components/Container";
 import Loading from "@/components/Loading";
-import Pagination from "@/components/home/Pagination";
+import Pagination from "@/components/Pagination";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";

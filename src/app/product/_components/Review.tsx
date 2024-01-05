@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import Rating from "../Rating";
+import Rating from "../../../components/Rating";
 import Image from "next/image";
 import ReviewForm from "./ReviewForm";
 

@@ -1,4 +1,4 @@
-import AdminHeader from "@/components/admin/AdminHeader";
+import AdminHeader from "@/app/admin/_components/AdminHeader";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

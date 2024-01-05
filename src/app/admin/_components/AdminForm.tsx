@@ -1,5 +1,5 @@
 import { ChangeEvent, Dispatch, FormEvent, SetStateAction } from "react";
-import Container from "../Container";
+import Container from "../../../components/Container";
 import AdminCategory from "./AdminCategory";
 import { sizes } from "@/constant";
 import ImageFile from "./ImageFile";

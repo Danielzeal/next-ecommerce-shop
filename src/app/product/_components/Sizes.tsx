@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Rating from "../Rating";
-import Horizontal from "../Horizontal";
-import Quantity from "../cart/Quantity";
-import { useRouter } from "next/navigation";
+import Rating from "../../../components/Rating";
+import Horizontal from "../../../components/Horizontal";
+import Quantity from "../../../components/cart/Quantity";
 import { useCartStore } from "@/store/store";
-import Button from "../Button";
+import Button from "../../../components/Button";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
@@ -25,8 +24,6 @@ const Sizes = ({ product }: Props) => {
     useCartStore.persist.rehydrate();
   }, []);
 
-  const router = useRouter();
-
   const handleChange = (index: number) => {
     setSelected(index);
   };
@@ -35,7 +32,7 @@ const Sizes = ({ product }: Props) => {
     addToCart({
       id: `${product.id}${product.sizes[selected]}`,
       size: product.sizes[selected],
-      img: product.img,
+      img: product.img!,
       quantity: count,
       price: product.price,
       name: product.title,

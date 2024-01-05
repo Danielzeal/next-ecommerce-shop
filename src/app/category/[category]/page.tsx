@@ -1,23 +1,24 @@
 import Container from "@/components/Container";
-import Products from "@/components/home/Products";
+import Products from "@/components/Products";
 import { FC } from "react";
 
 type Props = {
   searchParams: {
     [key: string]: string | string[] | undefined;
   };
-  params: {
-    category: string;
-  };
 };
 
-const ProductsPage: FC<Props> = ({ searchParams, params }) => {
-  const pageNumber: number = Number(searchParams.page) || 1;
-  const { category } = params;
+const ProductsPage: FC<Props> = ({ searchParams }) => {
+  const category =
+    typeof searchParams.category === "string"
+      ? searchParams.category
+      : undefined;
+  const page =
+    typeof searchParams.page === "string" ? Number(searchParams.page) : 1;
 
   return (
     <Container>
-      <Products pageNumber={pageNumber} category={category} />
+      <Products page={page} category={category} />
     </Container>
   );
 };

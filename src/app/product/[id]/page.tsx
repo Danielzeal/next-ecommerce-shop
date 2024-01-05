@@ -1,8 +1,8 @@
 import Container from "@/components/Container";
-import Sizes from "@/components/product/Sizes";
+import Sizes from "@/app/product/_components/Sizes";
 import Image from "next/image";
 import Horizontal from "@/components/Horizontal";
-import Review from "@/components/product/Review";
+import Review from "@/app/product/_components/Review";
 import getProduct from "@/actions/getProduct";
 
 const SingleProduct = async ({ params }: { params: { id: string } }) => {

@@ -1,6 +1,6 @@
 "use client";
 
-import Form from "@/components/admin/AdminForm";
+import Form from "@/app/admin/_components/AdminForm";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";

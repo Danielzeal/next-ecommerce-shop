@@ -4,7 +4,7 @@ import Image from "next/image";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Link from "next/link";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import Pagination from "../home/Pagination";
+import Pagination from "../../../components/Pagination";
 
 type Props = {
   products: Products;
@@ -60,13 +60,15 @@ const AdminProducts = ({ products, count, pageNumber }: Props) => {
                   className='flex items-center gap-3 text-start cursor-pointer'
                 >
                   <div className='w-24 h-24 relative'>
-                    <Image
-                      src={product.img}
-                      alt={"testing"}
-                      fill
-                      sizes='100%'
-                      className='object-contain'
-                    />
+                    {product.img && (
+                      <Image
+                        src={product.img}
+                        alt={"testing"}
+                        fill
+                        sizes='100%'
+                        className='object-contain'
+                      />
+                    )}
                   </div>
                   <p className='font-semibold text-lg capitalize'>
                     {product.title}
@@ -75,7 +77,7 @@ const AdminProducts = ({ products, count, pageNumber }: Props) => {
               </td>
               <td>{product.price}</td>
               <td className='capitalize'>{product.catName}</td>
-              <td>{product.createdAt.slice(0, 10)}</td>
+              <td>{product.createdAt.toString().slice(0, 10)}</td>
               <td>
                 <button onClick={() => handleDelete(product.id)}>
                   <FaTrash className='text-red-500 text-2xl' />

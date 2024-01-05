@@ -1,4 +1,4 @@
-import { getCategories } from "@/services";
+import getCategories from "@/actions/getCategories";
 import Link from "next/link";
 
 type Prop = {
@@ -6,7 +6,7 @@ type Prop = {
 };
 
 const Category = async ({ catName }: Prop) => {
-  const categories: CategoryType[] = await getCategories();
+  const categories = await getCategories();
 
   return (
     <div className='flex gap-8 mt-6 overflow-x-scroll no-scrollbar'>

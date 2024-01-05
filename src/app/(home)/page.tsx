@@ -1,7 +1,7 @@
 import Container from "@/components/Container";
-import Products from "@/components/home/Products";
-import HeroSection from "@/components/home/HeroSection";
+import Products from "@/components/Products";
 import { FC } from "react";
+import HeroSection from "./_components/HeroSection";
 
 type Props = {
   searchParams: {

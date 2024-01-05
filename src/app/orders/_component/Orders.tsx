@@ -1,4 +1,4 @@
-import Pagination from "@/components/home/Pagination";
+import Pagination from "@/components/Pagination";
 import { Order } from "@prisma/client";
 import { FC } from "react";
 
