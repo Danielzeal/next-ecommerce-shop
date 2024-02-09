@@ -2,7 +2,6 @@
 
 import { useCartStore } from "@/store/store";
 import {
-  AddressElement,
   PaymentElement,
   useElements,
   useStripe,
