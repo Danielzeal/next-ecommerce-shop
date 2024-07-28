@@ -33,9 +33,7 @@ const Products = ({ searchParams }: Props) => {
   const { isLoading, data } = useQuery({
     queryKey: ["products", pageNumber],
     queryFn: async () => {
-      const res = await fetch(
-        `/api/products/?page=${pageNumber}&category=${undefined}`
-      );
+      const res = await fetch(`/api/products/?page=${pageNumber}`);
 
       if (!res.ok) {
         throw new Error("Something went wrong");

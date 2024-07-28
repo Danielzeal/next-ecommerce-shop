@@ -22,9 +22,7 @@ export const GET = async ({ searchParams }: Props) => {
     };
 
     const [count, products] = await Promise.all([
-      prisma.product.count({
-        where: query.where,
-      }),
+      prisma.product.count(),
       prisma.product.findMany(query),
     ]);
 
