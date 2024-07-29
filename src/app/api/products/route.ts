@@ -2,17 +2,21 @@ import { getAuthSession } from "@/util/auth";
 import { prisma } from "@/util/init-prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-type Props = {
-  searchParams: {
-    page: string;
-  };
-};
-
-export const GET = async ({ searchParams }: Props) => {
+export const GET = async (req: NextRequest) => {
   const productPerPage = 8;
-  const page: number = Number(searchParams.page) || 1;
+  const { searchParams } = new URL(req.url);
+
+  const page: number = Number(searchParams.get("page")) || 1;
+  console.log(page);
+  const session = await getAuthSession();
 
   try {
+    if (!session) {
+      return NextResponse.json(
+        { message: "Unauthorized user" },
+        { status: 401 }
+      );
+    }
     const query: any = {
       orderBy: {
         createdAt: "desc",
@@ -20,20 +24,29 @@ export const GET = async ({ searchParams }: Props) => {
       take: productPerPage,
       skip: productPerPage * (page - 1),
     };
+    console.log("we");
 
     const [count, products] = await Promise.all([
       prisma.product.count(),
       prisma.product.findMany(query),
     ]);
 
+    console.log("we");
+
     if (!products) {
-      throw new Error("Products not found");
+      return NextResponse.json({ message: "Not found" }, { status: 404 });
     }
 
-    return { products, pageCount: Math.ceil(count / productPerPage) };
+    return NextResponse.json(
+      { products, pageCount: Math.ceil(count / productPerPage) },
+      { status: 200 }
+    );
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error(error.message);
+      return NextResponse.json(
+        { message: "Something went wrong" },
+        { status: 500 }
+      );
     }
   }
 };
