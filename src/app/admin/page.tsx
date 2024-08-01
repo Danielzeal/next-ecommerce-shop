@@ -22,11 +22,11 @@ const Products = ({ searchParams }: Props) => {
   const { data: authUser, status } = useSession();
   const router = useRouter();
 
-  // useEffect(() => {
-  //   if (status === "unauthenticated" || !authUser?.user.isAdmin) {
-  //     router.push("/");
-  //   }
-  // }, [authUser, router, status]);
+  useEffect(() => {
+    if (status === "unauthenticated" || !authUser?.user.isAdmin) {
+      router.push("/");
+    }
+  }, [authUser, router, status]);
 
   useEffect(() => {}, [pageNumber]);
 

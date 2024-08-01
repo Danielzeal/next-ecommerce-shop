@@ -2,7 +2,7 @@ import { prisma } from "@/util/init-prisma";
 
 const getHomeProducts = async (page: number, category?: string) => {
   const productPerPage = 8;
-console.log(productPerPage)
+
   try {
     const query: any = {
       where: {
@@ -14,10 +14,8 @@ console.log(productPerPage)
       take: productPerPage,
       skip: productPerPage * (page - 1),
     };
-console.log("testing");
 
     const [count, products] = await Promise.all([
-      
       prisma.product.count({
         where: query.where,
       }),
