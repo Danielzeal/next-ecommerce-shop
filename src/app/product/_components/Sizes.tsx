@@ -57,8 +57,7 @@ const Sizes = ({ product }: Props) => {
                     ? "border border-green-400 text-green-300"
                     : "text-red-400"
                 }`}
-                onClick={() => handleChange(index)}
-              >
+                onClick={() => handleChange(index)}>
                 {size}
               </button>
             ))}
@@ -86,14 +85,12 @@ const Sizes = ({ product }: Props) => {
       <div className='flex justify-between items-center text-xs'>
         <Link
           href={"/"}
-          className='p-2 rounded-md hover:bg-black hover:text-white transition-colors duration-200 ease-in'
-        >
+          className='p-2 rounded-md hover:bg-black flex items-center gap-4 hover:text-white transition-colors duration-200 ease-in'>
           <FaArrowLeft /> Continue Shopping
         </Link>
         <Link
           href={"/cart"}
-          className='p-2 rounded-md hover:bg-black hover:text-white transition-colors duration-200 ease-in'
-        >
+          className='p-2 rounded-md hover:bg-black flex items-center gap-4 hover:text-white transition-colors duration-200 ease-in'>
           Visit Cart <FaArrowRight />
         </Link>
       </div>
